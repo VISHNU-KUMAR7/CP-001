@@ -11,6 +11,7 @@ const Login = lazy(() => import("../components/Login"));
 const Profile = lazy(() => import("../components/Profile"));
 const Help = lazy(() => import("../components/Help"));
 const About = lazy(() => import("../components/About"));
+const NotFound = lazy(() => import("../components/NotFound"));
 
 export default function routes() {
   return (
@@ -103,6 +104,15 @@ export default function routes() {
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
               <Protected Cmp={About} />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/*"
+          element={
+            <Suspense fallback={<span>Please Wait....</span>}>
+              {" "}
+              <Protected Cmp={NotFound} />
             </Suspense>
           }
         />
