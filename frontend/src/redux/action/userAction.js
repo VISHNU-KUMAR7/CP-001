@@ -1,3 +1,3 @@
-export const login = () => {
-  return { type: "LOGIN", data: "login" };
+export const login = (data) => {
+  return { type: "LOGIN", data };
 };
