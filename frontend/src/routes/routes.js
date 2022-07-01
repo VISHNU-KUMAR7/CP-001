@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-
+import Protected from "../protected/Protected";
 const Dashboard = lazy(() => import("../components/Dashboard"));
 const EditIssue = lazy(() => import("../components/EditIssue"));
 const AddIssue = lazy(() => import("../components/AddIssue"));
@@ -21,7 +21,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <Dashboard />
+              <Protected Cmp={Dashboard} />
             </Suspense>
           }
         />
@@ -30,7 +30,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <EditIssue />
+              <Protected Cmp={EditIssue} />
             </Suspense>
           }
         />
@@ -39,7 +39,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <AddIssue />
+              <Protected Cmp={AddIssue} />
             </Suspense>
           }
         />
@@ -48,7 +48,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <ViewIssue />
+              <Protected Cmp={ViewIssue} />
             </Suspense>
           }
         />
@@ -57,7 +57,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <DetailIssue />
+              <Protected Cmp={DetailIssue} />
             </Suspense>
           }
         />
@@ -66,7 +66,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <Register />
+              <Protected Cmp={Register} />
             </Suspense>
           }
         />
@@ -75,7 +75,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <Login />
+              <Protected Cmp={Login} />
             </Suspense>
           }
         />
@@ -84,7 +84,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <Profile />
+              <Protected Cmp={Profile} />
             </Suspense>
           }
         />
@@ -93,7 +93,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <Help />
+              <Protected Cmp={Help} />
             </Suspense>
           }
         />
@@ -102,7 +102,7 @@ export default function routes() {
           element={
             <Suspense fallback={<span>Please Wait....</span>}>
               {" "}
-              <About />
+              <Protected Cmp={About} />
             </Suspense>
           }
         />
