@@ -49,7 +49,11 @@ class userAPI {
                   expiresIn: "100s",
                 },
                 (e, token) => {
-                  resolve({ unHashPassword, token });
+                  resolve({
+                    unHashPassword,
+                    token,
+                    status: "Login Sucessfully!",
+                  });
                 }
               )
             : resolve({ status: "Wronge Password!" });

@@ -6,18 +6,20 @@ import * as Yup from "yup";
 import { login } from "../redux/action/userAction";
 import ErrorMsg from "./error/ErrorMsg";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const results = useSelector((state) => state.userData);
   const navigate = useNavigate();
+  const results = useSelector((state) => state.userData);
   useEffect(() => {
     if (results.token) {
       localStorage.setItem("token", results.token);
-      console.log(results);
+      navigate("/");
     }
+    toast(results.status);
   }, [results]);
-  console.log("Result from Login data", results);
 
   const initialValues = {
     password: "",
@@ -25,12 +27,10 @@ const Login = () => {
   };
   const onSubmit = (values, onSubmitProps) => {
     dispatch(login(values));
+    onSubmitProps.preventDefault();
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
-  // const loginCheck = (values)=>{
-
-  // }
 
   const validationSchema = Yup.object({
     password: Yup.string().required("Password is required!"),
@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <>
-      Login
+      <ToastContainer /> Login
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-6 align-self-center mt-5 pt-5 border border-dark border-4 rounded rounded-2">
