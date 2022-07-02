@@ -10,7 +10,7 @@ const registerUserController = (req, res, next) => {
   }
 };
 const loginUserController = (req, res, next) => {
-  console.log(req.body);
+  console.log("line no 13", req.body);
   try {
     userAPI
       .loginUser(req.body)

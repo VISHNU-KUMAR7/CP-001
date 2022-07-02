@@ -10,7 +10,7 @@ router.use("/getIssueByUser", usersMiddleware);
 
 /* GET users listing. */
 router.post("/registerUser", registerUserController);
-router.get("/loginUser", loginUserController);
+router.post("/loginUser", loginUserController);
 router.post("/getIssueByUser", getIssueByUserController);
 
 module.exports = router;
