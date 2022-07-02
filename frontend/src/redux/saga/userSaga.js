@@ -2,9 +2,9 @@ import { takeEvery, put } from "redux-saga/effects";
 import userApi from "../../api/userApi";
 
 function* getUser({ values }) {
-  yield userApi.getAllUser(values).then((data) => {
-    put({ type: "GETDATA", data: data });
-  });
+  // console.log("Values from userSaga.js", values);
+  const data = yield userApi.getAllUser(values).then((data) => data);
+  yield put({ type: "LOGIN_STATUS", ...data });
 }
 
 function* userSaga() {

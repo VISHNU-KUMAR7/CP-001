@@ -35,26 +35,28 @@ class userAPI {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await userModel.findOne({ eMail: eMail });
-        const unHashPassword = await bcrypt.compare(
-          password,
-          response.password
-        );
-        unHashPassword
-          ? jwt.sign(
-              { response },
-              process.env.JWT_KEY,
-              {
-                expiresIn: "100s",
-              },
-              (e, token) => {
-                resolve({ unHashPassword, token });
-              }
-            )
-          : "";
-
-        // const response = userModel.insert();
-        // resolve(response);
-        //call model and perform operation
+        // console.log(eMail);
+        if (response) {
+          const unHashPassword = await bcrypt.compare(
+            password,
+            response.password
+          );
+          unHashPassword
+            ? jwt.sign(
+                { response },
+                process.env.JWT_KEY,
+                {
+                  expiresIn: "100s",
+                },
+                (e, token) => {
+                  resolve({ unHashPassword, token });
+                }
+              )
+            : resolve({ status: "Wronge Password!" });
+        } else {
+          console.log("Wronge Email");
+          resolve({ status: "Wronge Email!" });
+        }
       } catch (error) {
         //send the toster with sutible error
         reject(error);

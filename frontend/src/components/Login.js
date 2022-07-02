@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -7,11 +7,17 @@ import { login } from "../redux/action/userAction";
 import ErrorMsg from "./error/ErrorMsg";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+const Login = () => {
   const dispatch = useDispatch();
   const results = useSelector((state) => state.userData);
-  console.log(results);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (results.token) {
+      localStorage.setItem("token", results.token);
+      console.log(results);
+    }
+  }, [results]);
+  console.log("Result from Login data", results);
 
   const initialValues = {
     password: "",
@@ -21,8 +27,10 @@ export default function Login() {
     dispatch(login(values));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    navigate("/");
   };
+  // const loginCheck = (values)=>{
+
+  // }
 
   const validationSchema = Yup.object({
     password: Yup.string().required("Password is required!"),
@@ -120,4 +128,6 @@ export default function Login() {
       </div>
     </>
   );
-}
+};
+
+export default Login;

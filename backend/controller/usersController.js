@@ -14,10 +14,10 @@ const loginUserController = (req, res, next) => {
   try {
     userAPI
       .loginUser(req.body)
-      .then((data) => res.status(201).send(data))
-      .catch((error) => res.status(301).send(error));
+      .then((data) => res.status(201).send({ data }))
+      .catch((error) => res.status(301).send({ ...error, status: "fail" }));
   } catch (error) {
-    res.status(301).send(error);
+    res.status(301).send({ ...error, status: "fail" });
   }
 };
 const getIssueByUserController = (req, res, next) => {
