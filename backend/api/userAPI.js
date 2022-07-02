@@ -20,12 +20,12 @@ class userAPI {
             expiresIn: "100s",
           },
           (e, token) => {
-            resolve({ ...response._doc, token: token });
+            resolve({ ...response._doc, token: token, status:"User Registered!" });
           }
         );
       } catch (error) {
         //send the toster with sutible error
-        reject(error);
+        resolve({...error,status:"User Not Register!"});
         console.log(error);
       }
     });

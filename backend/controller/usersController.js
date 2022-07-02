@@ -4,9 +4,9 @@ const registerUserController = (req, res, next) => {
     userAPI
       .registerUser(req.body)
       .then((data) => res.status(201).send(data))
-      .catch((error) => res.status(301).send(error));
+      .catch((error) => res.status(201).send("Error in backend!"));
   } catch (error) {
-    res.status(301).send(error);
+    res.status(201).send({ ...error, status: "Somthing went wrong!" });
   }
 };
 const loginUserController = (req, res, next) => {

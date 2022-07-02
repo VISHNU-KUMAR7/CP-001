@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
   lName: { type: String, require: true, trim: true },
   password: { type: String, require: true, trim: true },
   eMail: { type: String, require: true, trim: true, unique: true },
-  phoneNo: { type: Number, require: true, trim: true },
+  phoneNo: { type: String, require: true, trim: true },
   location: { type: String, require: true, trim: true },
   join: { type: Date, default: Date.now },
 });
