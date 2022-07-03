@@ -1,10 +1,14 @@
 var issuesModel = require("../schema/issueSchema.js");
 
 class issueAPI {
-  static getIssueByUser({ eMail }) {
+  static getIssueByUser({ eMail, skip, limit }) {
+    console.log({ eMail, skip, limit })
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await issuesModel.find({ eMail: eMail });
+        const response = await issuesModel
+          .find({ eMail: eMail })
+          .skip(skip)
+          .limit(limit);
         resolve(response);
       } catch (error) {
         console(error);
@@ -16,12 +20,9 @@ class issueAPI {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
-        const response = await issuesModel
-          .find({
-            eMail: eMail,
-          })
-          .skip(skip)
-          .limit(limit);
+        const response = await issuesModel.find({
+          eMail: eMail,
+        });
         resolve(response);
       } catch (error) {
         //send the toster with sutible error

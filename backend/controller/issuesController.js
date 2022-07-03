@@ -37,6 +37,7 @@ const getIssueByIdController = function (req, res, next) {
   // res.status(200).send("Getting Issue By Id");
 };
 const getIssuesBySearchController = function (req, res, next) {
+  console.log(req.body);
   issueAPI
     .getIssuesBySearch(req.body)
     .then((data) => res.status(200).send(data))
