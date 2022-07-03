@@ -1,24 +1,24 @@
 var issuesModel = require("../schema/issueSchema.js");
 
 class issueAPI {
-  static getIssueByUser({ userEmail }) {
+  static getIssueByUser({ eMail }) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response  = await issuesModel.find({userEmail:userEmail})
-        resolve(response)
+        const response = await issuesModel.find({ eMail: eMail });
+        resolve(response);
       } catch (error) {
         console(error);
         reject(error);
       }
     });
   }
-  static getAllIssues({ userEmail, skip, limit }) {
+  static getAllIssues({ eMail, skip, limit }) {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
         const response = await issuesModel
           .find({
-            userEmail: userEmail,
+            eMail: eMail,
           })
           .skip(skip)
           .limit(limit);
@@ -31,7 +31,7 @@ class issueAPI {
     });
   }
 
-  static getIssueById({ userEmail, id }) {
+  static getIssueById({ eMail, id }) {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
@@ -45,13 +45,19 @@ class issueAPI {
     });
   }
 
-  static getIssuesBySearch({ userEmail, searchItem, skip, limit }) {
+  static getIssuesBySearch({ eMail, searchItem, skip, limit }) {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
+        console.log("Getteing the data for search", {
+          userEmail: eMail,
+          searchItem,
+          skip,
+          limit,
+        });
         const response = await issuesModel
           .find({
-            userEmail: userEmail,
+            userEmail: eMail,
             $or: [
               { description: { $regex: searchItem, $options: "i" } },
               { status: { $regex: searchItem, $options: "i" } },
@@ -59,6 +65,7 @@ class issueAPI {
           })
           .skip(skip)
           .limit(limit);
+        console.log("Getting response", response);
         resolve(response);
       } catch (error) {
         //send the toster with sutible error
@@ -82,7 +89,7 @@ class issueAPI {
     });
   }
 
-  static updateIssue({ userEmail, id, data }) {
+  static updateIssue({ eMail, id, data }) {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
@@ -96,7 +103,7 @@ class issueAPI {
     });
   }
 
-  static deleteIssue({ userEmail, id }) {
+  static deleteIssue({ eMail, id }) {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
@@ -110,7 +117,7 @@ class issueAPI {
     });
   }
 
-  static multipleDeleteIssue({ userEmail, ids }) {
+  static multipleDeleteIssue({ eMail, ids }) {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
@@ -126,5 +133,3 @@ class issueAPI {
 }
 
 module.exports = issueAPI;
-
-

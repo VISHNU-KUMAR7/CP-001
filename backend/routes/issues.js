@@ -17,7 +17,7 @@ var router = express.Router();
 router.post("/getIssueByUser", getIssueByUserController);
 router.get("/getAllIssues", getAllIssuesController);
 router.get("/getIssueById", getIssueByIdController);
-router.get("/getIssuesBySearch", getIssuesBySearchController);
+router.post("/getIssuesBySearch", getIssuesBySearchController);
 router.post("/addIssue", addIssueController);
 router.put("/updateIssue", updateIssueController);
 router.delete("/deleteIssue", deleteIssueController);

@@ -4,7 +4,7 @@ const issueSchema = mongoose.Schema({
   description: { type: String, require: true, trim: true },
   severity: { type: String, require: true, trim: true },
   status: { type: String, require: true, trim: true },
-  userEmail: { type: String, require: true, trim: true },
+  eMail: { type: String, require: true, trim: true },
   date: { type: Date, default: Date.now },
 });
 
