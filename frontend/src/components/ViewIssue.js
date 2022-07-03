@@ -7,28 +7,31 @@ export default function ViewIssue() {
   const dispatch = useDispatch();
   const result = useSelector((state) => state.issueData);
   const [currentPage, setCurrentPage] = useState(0);
+  const [limit, setLimitPage] = useState(10);
   const eMail = localStorage.getItem("eMail");
 
-  const limit = 10; // this will be dynamic by drop-down
   useEffect(() => {
     dispatch(getIssue({ eMail, limit, skip: currentPage * limit }));
-  }, []);
-  useEffect(() => {});
+  }, [limit]);
+  useEffect(() => {},[limit]);
   const searchText = (e) => {
-    // eMail, searchItem, skip, limit
-    console.log(e.target.value.length);
     if (e.target.value.length !== 0) {
       dispatch(
         getIssueBySearch({
           searchItem: e.target.value,
           eMail,
-          skip: 0,
+          skip: currentPage * limit,
           limit,
         })
       );
     } else {
       dispatch(getIssue({ eMail, limit, skip: currentPage * limit }));
     }
+  };
+
+  const handleLimitClick = (e) => {
+    setLimitPage(parseInt(e.target.value));
+    console.log(parseInt(e.target.value));
   };
 
   const handlePageClick = async (data) => {
@@ -64,6 +67,19 @@ export default function ViewIssue() {
           </>
         );
       })}
+      {/* dropDown */}
+      <select
+        name="cars"
+        id="cars"
+        onChange={(e) => {
+          handleLimitClick(e);
+        }}
+      >
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
       {/* <Pagination /> */}
       <ReactPaginate
         previousLabel={"<<"}
