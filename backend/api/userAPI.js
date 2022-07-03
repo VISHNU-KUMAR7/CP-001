@@ -20,12 +20,17 @@ class userAPI {
             expiresIn: "100s",
           },
           (e, token) => {
-            resolve({ ...response._doc, token: token, status:"User Registered!" });
+            resolve({
+              ...response._doc,
+              token: token,
+              eMail: detail.eMail,
+              status: "User Registered!",
+            });
           }
         );
       } catch (error) {
         //send the toster with sutible error
-        resolve({...error,status:"User Not Register!"});
+        resolve({ ...error, status: "User Not Register!" });
         console.log(error);
       }
     });
@@ -52,6 +57,7 @@ class userAPI {
                   resolve({
                     unHashPassword,
                     token,
+                    eMail,
                     status: "Login Sucessfully!",
                   });
                 }

@@ -11,14 +11,16 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const results = useSelector((state) => state.userData);
+  const { token, eMail, status } = useSelector((state) => state.userData);
+
   useEffect(() => {
-    if (results.token) {
-      localStorage.setItem("token", results.token);
+    if (token) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("eMail", eMail);
       navigate("/");
     }
-    toast(results.status);
-  }, [results]);
+    toast(status);
+  }, [status]);
 
   const initialValues = {
     password: "",
@@ -26,7 +28,6 @@ const Login = () => {
   };
   const onSubmit = (values, onSubmitProps) => {
     dispatch(login(values));
-    // onSubmitProps.preventDefault();
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };

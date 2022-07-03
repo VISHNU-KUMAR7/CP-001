@@ -20,12 +20,10 @@ export default function Forms(props) {
   };
 
   const onSubmit = (values, onSubmitProps) => {
-    console.log("0 AddIssue called", { ...values, eMail: "Holly@Dolly.com" });
-    dispatch(addIssue({ ...values, eMail: "Holly@Dolly.com" }));
-    console.log(values);
+    dispatch(addIssue({ ...values, eMail: "ram@ram.com" }));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    // navigate("/");
+    navigate("/");
   };
 
   const validationSchema = Yup.object({

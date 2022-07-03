@@ -12,10 +12,15 @@ export default function Forms(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { status } = useSelector((state) => state.userData);
-  console.log(status);
+  const { status, token, eMail } = useSelector((state) => state.userData);
+  console.log({ status, token, eMail });
 
   useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("eMail", eMail);
+      navigate("/");
+    }
     toast(status);
   }, [status]);
 
@@ -31,7 +36,6 @@ export default function Forms(props) {
     dispatch(register(values));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    navigate("/");
   };
 
   const validationSchema = Yup.object({

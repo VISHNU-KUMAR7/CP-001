@@ -7,7 +7,7 @@ export default function ViewIssue() {
   const result = useSelector((state) => state.issueData);
   console.log("result from viewIssue", result);
   useEffect(() => {
-    dispatch(getIssue("Holly@Dolly.com"));
+    dispatch(getIssue("ram@ram.com"));
   }, []);
   useEffect(() => {});
   const searchText = (e) => {
@@ -17,13 +17,13 @@ export default function ViewIssue() {
       dispatch(
         getIssueBySearch({
           searchItem: e.target.value,
-          eMail: "Holly@Dolly.com",
+          eMail: "ram@ram.com",
           skip: 0,
           limit: 5,
         })
       );
     } else {
-      dispatch(getIssue("Holly@Dolly.com"));
+      dispatch(getIssue("ram@ram.com"));
     }
   };
 

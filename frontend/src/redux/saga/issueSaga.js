@@ -6,9 +6,7 @@ function* getIssueData({ values }) {
   yield put({ type: "GET_ISSUE_DATA", ...result });
 }
 function* addIssueData({ values }) {
-  console.log("2 Saga called..", values);
   const result = yield issueApi.addIssue(values).then((data) => data);
-  console.log("5 Saga called..", result);
 
   yield put({ type: "ADD_ISSUE_DATA", ...result });
 }
