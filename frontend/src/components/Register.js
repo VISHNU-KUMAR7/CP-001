@@ -13,7 +13,6 @@ export default function Forms(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const { status, token, eMail } = useSelector((state) => state.userData);
-  console.log({ status, token, eMail });
 
   useEffect(() => {
     if (token) {

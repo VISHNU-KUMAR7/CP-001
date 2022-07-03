@@ -5,9 +5,9 @@ import { getIssue, getIssueBySearch } from "../redux/action/issueAction";
 export default function ViewIssue() {
   const dispatch = useDispatch();
   const result = useSelector((state) => state.issueData);
-  console.log("result from viewIssue", result);
+  const eMail = localStorage.getItem("eMail");
   useEffect(() => {
-    dispatch(getIssue("ram@ram.com"));
+    dispatch(getIssue(eMail));
   }, []);
   useEffect(() => {});
   const searchText = (e) => {
@@ -17,13 +17,13 @@ export default function ViewIssue() {
       dispatch(
         getIssueBySearch({
           searchItem: e.target.value,
-          eMail: "ram@ram.com",
+          eMail,
           skip: 0,
           limit: 5,
         })
       );
     } else {
-      dispatch(getIssue("ram@ram.com"));
+      dispatch(getIssue(eMail));
     }
   };
 

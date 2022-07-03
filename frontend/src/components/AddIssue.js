@@ -12,6 +12,7 @@ export default function Forms(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const eMail = localStorage.getItem("eMail");
 
   const initialValues = {
     description: "",
@@ -20,7 +21,7 @@ export default function Forms(props) {
   };
 
   const onSubmit = (values, onSubmitProps) => {
-    dispatch(addIssue({ ...values, eMail: "ram@ram.com" }));
+    dispatch(addIssue({ ...values, eMail }));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
     navigate("/");
