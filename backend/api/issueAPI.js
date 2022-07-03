@@ -78,13 +78,10 @@ class issueAPI {
   static addIssue(data) {
     return new Promise(async (resolve, reject) => {
       try {
-        //call model and perform operation
         const response = await issuesModel.insertMany(data);
         resolve(response.data);
       } catch (error) {
-        //send the toster with sutible error
         reject(error);
-        console.log(error);
       }
     });
   }

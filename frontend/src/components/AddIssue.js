@@ -4,9 +4,9 @@ import * as Yup from "yup";
 import { useNavigate, useLocation } from "react-router-dom";
 import ErrorMsg from "./error/ErrorMsg";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../redux/action/userAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { addIssue } from "../redux/action/issueAction";
 
 export default function Forms(props) {
   const dispatch = useDispatch();
@@ -18,8 +18,10 @@ export default function Forms(props) {
     severity: "",
     status: "",
   };
+
   const onSubmit = (values, onSubmitProps) => {
-    // dispatch(register(values));
+    console.log("0 AddIssue called", { ...values, eMail: "Holly@Dolly.com" });
+    dispatch(addIssue({ ...values, eMail: "Holly@Dolly.com" }));
     console.log(values);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
@@ -41,7 +43,7 @@ export default function Forms(props) {
               className="col-md-12"
               style={{ textAlign: "left", color: "#FF5349" }}
             >
-              Register
+              Add Issue
             </h3>
             <hr style={{ margin: "10px 0 30px 0" }} />
             <Formik
