@@ -5,7 +5,7 @@ class issueApi {
       try {
         const response = await axios.post(
           "http://localhost:3001/issues/getIssueByUser",
-          { userEmail: data }
+          { eMail: data }
         );
         resolve(response);
       } catch (e) {

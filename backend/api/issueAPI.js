@@ -48,7 +48,6 @@ class issueAPI {
   static getIssuesBySearch({ eMail, searchItem, skip, limit }) {
     return new Promise(async (resolve, reject) => {
       try {
-        //call model and perform operation
         console.log("Getteing the data for search", {
           userEmail: eMail,
           searchItem,
@@ -57,7 +56,7 @@ class issueAPI {
         });
         const response = await issuesModel
           .find({
-            userEmail: eMail,
+            eMail: eMail,
             $or: [
               { description: { $regex: searchItem, $options: "i" } },
               { status: { $regex: searchItem, $options: "i" } },
@@ -68,9 +67,7 @@ class issueAPI {
         console.log("Getting response", response);
         resolve(response);
       } catch (error) {
-        //send the toster with sutible error
         reject(error);
-        console.log(error);
       }
     });
   }
