@@ -11,10 +11,10 @@ const {
   multipleDeleteIssueController,
 } = require("../controller/issuesController.js");
 var router = express.Router();
-router.use(IssuesMiddleware);
+// router.use(IssuesMiddleware);
 
 /* GET users listing. */
-router.get("/getIssueByUser", getIssueByUserController);
+router.post("/getIssueByUser", getIssueByUserController);
 router.get("/getAllIssues", getAllIssuesController);
 router.get("/getIssueById", getIssueByIdController);
 router.get("/getIssuesBySearch", getIssuesBySearchController);

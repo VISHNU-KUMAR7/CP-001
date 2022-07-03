@@ -1,6 +1,7 @@
 var issueAPI = require("../api/issueAPI");
 
 const getIssueByUserController = (req, res, next) => {
+  console.log(req.body);
   try {
     issueAPI
       .getIssueByUser(req.body)

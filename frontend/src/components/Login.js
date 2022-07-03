@@ -26,7 +26,7 @@ const Login = () => {
   };
   const onSubmit = (values, onSubmitProps) => {
     dispatch(login(values));
-    onSubmitProps.preventDefault();
+    // onSubmitProps.preventDefault();
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };

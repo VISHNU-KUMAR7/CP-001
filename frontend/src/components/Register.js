@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useLocation } from "react-router-dom";
 import ErrorMsg from "./error/ErrorMsg";
-import userApi from "../api/userApi";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/action/userAction";
 import { ToastContainer, toast } from "react-toastify";
