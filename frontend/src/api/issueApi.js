@@ -27,6 +27,20 @@ class issueApi {
       }
     });
   }
+  static editIssue(data) {
+    return new Promise(async (resolve, reject) => {
+      try {
+
+        const response = await axios.put(
+          "http://localhost:3001/issues/updateIssue",
+          data
+        );
+        resolve(response);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 
   static getIssueBySearch(data) {
     console.log("getting the data from issueApi", data);

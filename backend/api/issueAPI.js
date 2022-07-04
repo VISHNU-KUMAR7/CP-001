@@ -2,7 +2,7 @@ var issuesModel = require("../schema/issueSchema.js");
 
 class issueAPI {
   static getIssueByUser({ eMail, skip, limit }) {
-    console.log({ eMail, skip, limit })
+    console.log({ eMail, skip, limit });
     return new Promise(async (resolve, reject) => {
       try {
         const response = await issuesModel
@@ -84,11 +84,15 @@ class issueAPI {
     });
   }
 
-  static updateIssue({ eMail, id, data }) {
+  static updateIssue({ eMail, _id, description, severity, status }) {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
-        const response = await issuesModel.findByIdAndUpdate(id, data);
+        const response = await issuesModel.findByIdAndUpdate(_id, {
+          description,
+          severity,
+          status,
+        });
         resolve(response);
       } catch (error) {
         //send the toster with sutible error

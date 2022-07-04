@@ -6,25 +6,29 @@ import ErrorMsg from "./error/ErrorMsg";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { addIssue } from "../redux/action/issueAction";
+import { addIssue, editIssue } from "../redux/action/issueAction";
+import EditIssue from "./EditIssue";
 
 export default function Forms(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const eMail = localStorage.getItem("eMail");
-
+  const { data } = props;
+  console.log(data);
+  // const { description, _id, severity, status } = data;
   const initialValues = {
-    description: "",
-    severity: "",
-    status: "",
+    description: data ? data.description : "",
+    severity: data ? data.severity : "",
+    status: data ? data.status : "",
   };
 
   const onSubmit = (values, onSubmitProps) => {
-    dispatch(addIssue({ ...values, eMail }));
+    data
+      ? dispatch(editIssue({ _id: data._id, eMail: data.eMail, ...values }))
+      : dispatch(addIssue({ ...values, eMail }));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    navigate("/");
+    navigate(-1);
   };
 
   const validationSchema = Yup.object({
@@ -42,7 +46,7 @@ export default function Forms(props) {
               className="col-md-12"
               style={{ textAlign: "left", color: "#FF5349" }}
             >
-              Add Issue
+              {data ? "Edit" : "Add"} Issue
             </h3>
             <hr style={{ margin: "10px 0 30px 0" }} />
             <Formik
@@ -94,13 +98,13 @@ export default function Forms(props) {
                       <div className="col-md-4 ">
                         <button
                           type="button"
-                          className="btn btn-primary"
+                          className="btn btn-outline-primary"
                           style={{
                             borderColor: "#FF5349",
-                            backgroundColor: "#FF5349",
+                            color: "#FF5349",
                           }}
                           onClick={() => {
-                            navigate("/");
+                            navigate(-1);
                           }}
                         >
                           Back
@@ -123,7 +127,7 @@ export default function Forms(props) {
                             )
                           }
                         >
-                          Register
+                          {data ? "Update" : "Add"}
                         </button>
                       </div>
                     </div>

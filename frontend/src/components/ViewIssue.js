@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getIssue, getIssueBySearch } from "../redux/action/issueAction";
 import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
 
 export default function ViewIssue() {
   const dispatch = useDispatch();
@@ -13,7 +14,6 @@ export default function ViewIssue() {
   useEffect(() => {
     dispatch(getIssue({ eMail, limit, skip: currentPage * limit }));
   }, [limit]);
-  useEffect(() => {},[limit]);
   const searchText = (e) => {
     if (e.target.value.length !== 0) {
       dispatch(
@@ -42,7 +42,9 @@ export default function ViewIssue() {
   return (
     <>
       <div>ViewIssue</div>
+      {/* searchItem */}
       <input type={"text"} onChange={(e) => searchText(e)} />
+      {/* view card/Issue */}
       {result.map((data) => {
         return (
           <>
@@ -56,12 +58,12 @@ export default function ViewIssue() {
                 <span>{data.severity}</span>
                 <h6 className="card-title">Status:</h6>
                 <span>{data.status}</span>
-                <a href="#" className="card-link">
+                <Link to="/editIssue" className="card-link" state={{ ...data }}>
                   <ion-icon name="create-outline"></ion-icon>
-                </a>
-                <a href="#" className="card-link">
+                </Link>
+                <Link to="#" className="card-link">
                   <ion-icon name="trash-outline"></ion-icon>
-                </a>
+                </Link>
               </div>
             </div>
           </>
@@ -69,8 +71,8 @@ export default function ViewIssue() {
       })}
       {/* dropDown */}
       <select
-        name="cars"
-        id="cars"
+        name="limit"
+        id="limit"
         onChange={(e) => {
           handleLimitClick(e);
         }}

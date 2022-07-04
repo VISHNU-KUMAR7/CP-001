@@ -1,5 +1,15 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
+import AddIssue from "./AddIssue";
 
 export default function EditIssue() {
-  return <div>EditIssue</div>;
+  const location = useLocation();
+
+  const data = location.state;
+
+  return (
+    <>
+      <AddIssue data={data} />
+    </>
+  );
 }

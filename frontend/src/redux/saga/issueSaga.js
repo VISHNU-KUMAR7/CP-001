@@ -10,6 +10,11 @@ function* addIssueData({ values }) {
 
   yield put({ type: "ADD_ISSUE_DATA", ...result });
 }
+function* editIssueData({ values }) {
+  const result = yield issueApi.editIssue(values).then((data) => data);
+  yield put({ type: "EDIT_ISSUE_DATA", ...result });
+}
+
 function* getIssueBySearchData({ values }) {
   const result = yield issueApi.getIssueBySearch(values).then((data) => data);
   yield put({ type: "GET_ISSUE_BY_SEARCH_DATA", ...result });
@@ -18,6 +23,7 @@ function* getIssueBySearchData({ values }) {
 function* issueSaga() {
   yield takeEvery("GET_ISSUE", getIssueData);
   yield takeEvery("ADD_ISSUE", addIssueData);
+  yield takeEvery("EDIT_ISSUE", editIssueData);
   yield takeEvery("GET_ISSUE_BY_SEARCH", getIssueBySearchData);
 }
 
