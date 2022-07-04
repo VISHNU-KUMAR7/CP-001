@@ -14,6 +14,11 @@ function* editIssueData({ values }) {
   const result = yield issueApi.editIssue(values).then((data) => data);
   yield put({ type: "EDIT_ISSUE_DATA", ...result });
 }
+function* delIssueData({ values }) {
+  console.log("saga is called", values);
+  const result = yield issueApi.delIssue(values).then((data) => data);
+  yield put({ type: "DEL_ISSUE_DATA", ...result });
+}
 
 function* getIssueBySearchData({ values }) {
   const result = yield issueApi.getIssueBySearch(values).then((data) => data);
@@ -24,6 +29,7 @@ function* issueSaga() {
   yield takeEvery("GET_ISSUE", getIssueData);
   yield takeEvery("ADD_ISSUE", addIssueData);
   yield takeEvery("EDIT_ISSUE", editIssueData);
+  yield takeEvery("DEL_ISSUE", delIssueData);
   yield takeEvery("GET_ISSUE_BY_SEARCH", getIssueBySearchData);
 }
 

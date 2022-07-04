@@ -72,6 +72,7 @@ const updateIssueController = (req, res, next) => {
   // res.status(201).send("Issues Updated");
 };
 const deleteIssueController = (req, res, next) => {
+  console.log("Getting the data from fronend", req.body);
   try {
     issueAPI
       .deleteIssue(req.body)

@@ -102,11 +102,11 @@ class issueAPI {
     });
   }
 
-  static deleteIssue({ eMail, id }) {
+  static deleteIssue({ eMail, _id }) {
     return new Promise(async (resolve, reject) => {
       try {
         //call model and perform operation
-        const response = await issuesModel.findByIdAndDelete(id);
+        const response = await issuesModel.findByIdAndDelete(_id);
         resolve(response);
       } catch (error) {
         //send the toster with sutible error

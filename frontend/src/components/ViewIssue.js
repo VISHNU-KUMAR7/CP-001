@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getIssue, getIssueBySearch } from "../redux/action/issueAction";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
+import Card from "./Card";
 
 export default function ViewIssue() {
   const dispatch = useDispatch();
@@ -45,30 +46,15 @@ export default function ViewIssue() {
       {/* searchItem */}
       <input type={"text"} onChange={(e) => searchText(e)} />
       {/* view card/Issue */}
-      {result.map((data) => {
-        return (
-          <>
-            <div className="card" style={{ width: "20rem" }} key={data._id}>
-              <div className="card-body">
-                <h5 className="card-title">Issue ID </h5>
-                <h6 className="card-subtitle mb-2 text-muted">{data._id}</h6>
-                <p className="card-text">{data.description}</p>
-
-                <h6 className="card-title">Severity:</h6>
-                <span>{data.severity}</span>
-                <h6 className="card-title">Status:</h6>
-                <span>{data.status}</span>
-                <Link to="/editIssue" className="card-link" state={{ ...data }}>
-                  <ion-icon name="create-outline"></ion-icon>
-                </Link>
-                <Link to="#" className="card-link">
-                  <ion-icon name="trash-outline"></ion-icon>
-                </Link>
-              </div>
-            </div>
-          </>
-        );
-      })}
+      {result.map(({ description, severity, status, _id }) => (
+        <Card
+          key={_id}
+          _id={_id}
+          description={description}
+          severity={severity}
+          status={status}
+        />
+      ))}
       {/* dropDown */}
       <select
         name="limit"

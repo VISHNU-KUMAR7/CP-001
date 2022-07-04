@@ -20,7 +20,7 @@ router.get("/getIssueById", getIssueByIdController);
 router.post("/getIssuesBySearch", getIssuesBySearchController);
 router.post("/addIssue", addIssueController);
 router.put("/updateIssue", updateIssueController);
-router.delete("/deleteIssue", deleteIssueController);
+router.put("/deleteIssue", deleteIssueController);
 router.delete("/multipleDeleteIssues", multipleDeleteIssueController);
 
 module.exports = router;
