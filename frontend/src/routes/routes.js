@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import { useSelector } from "react-redux";
 import { ProtectLoginRegister, ProtectUser } from "../protected/Protected";
 const Dashboard = lazy(() => import("../components/Dashboard"));
 const EditIssue = lazy(() => import("../components/EditIssue"));
@@ -14,112 +16,118 @@ const Help = lazy(() => import("../components/Help"));
 const About = lazy(() => import("../components/About"));
 const NotFound = lazy(() => import("../components/NotFound"));
 
-export default function routes() {
+export default function RoutesFun() {
+  const data = useSelector((state) => state.cssData);
+  let toggle = data ? "col-sm-11" : "col-sm-10";
   return (
     <>
       <Header />
-      
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={Dashboard} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/editIssue"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={EditIssue} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/addIssue"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={AddIssue} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/viewIssue"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={ViewIssue} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/detailIssue"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={DetailIssue} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectLoginRegister Cmp={Register} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectLoginRegister Cmp={Login} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={Profile} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/help"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={Help} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/About"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={About} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/*"
-          element={
-            <Suspense fallback={<span>Please Wait....</span>}>
-              {" "}
-              <ProtectUser Cmp={NotFound} />
-            </Suspense>
-          }
-        />
-      </Routes>
+      <div className="row">
+        <Navbar />
+        <div className={toggle}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={Dashboard} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/editIssue"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={EditIssue} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/addIssue"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={AddIssue} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/viewIssue"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={ViewIssue} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/detailIssue"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={DetailIssue} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectLoginRegister Cmp={Register} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectLoginRegister Cmp={Login} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={Profile} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/help"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={Help} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/About"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={About} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/*"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <ProtectUser Cmp={NotFound} />
+                </Suspense>
+              }
+            />
+          </Routes>
+        </div>
+      </div>
     </>
   );
 }
