@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { bar } from "../redux/action/cssAction";
 
 export default function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const data = useSelector((state) => state.cssData);
+  const fName = "Gest";
+  const wish = "Morning";
+  const join = "12 Wed 2022 23:02:12";
+  const { token, eMail, status } = useSelector((state) => state.userData);
+  const login = localStorage.getItem("eMail");
   const toggle = () => {
-    data === 0 ? dispatch(bar(1)) : dispatch(bar(0));
+    data ? dispatch(bar(0)) : dispatch(bar(1));
   };
+  const logout = () => {
+    console.log("logout");
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <>
-      <div className="row" style={{ border: "1px solid red" }}>
-        <div className="col-sm-1 d-inline" style={{ border: "1px solid blue" }}>
+      <div className="row">
+        <div className="col-sm-1 d-inline">
           <ion-icon
             name="menu-outline"
             className="d-inline"
@@ -20,48 +33,49 @@ export default function Header() {
             }}
           ></ion-icon>
         </div>
-        <div className="col-sm-2" style={{ border: "1px solid blue" }}>
+        <div className="col-sm-2">
           <div className="row">
             <div className="col-sm-1">
               <ion-icon name="logo-apple-ar"></ion-icon>
             </div>
-            <div className="col-sm-3">Brand</div>
+            <div className="offset-sm-1 col-sm-3">Brand</div>
           </div>
         </div>
-        <div
-          className=" col-md-2 offset-lg-2   offset-md-0  "
-          style={{ border: "1px solid green" }}
-        >
-          Good Morning Vishnu
+        <div className=" col-md-2 offset-lg-2   offset-md-0  ">
+          Good {wish} {fName}
         </div>
-        <div
-          className=" col-lg-3 col-md-4 "
-          style={{ border: "1px solid yellow" }}
-        >
-          <div
-            className="row  flex-row-reverse"
-            style={{ border: "2px solid green" }}
-          >
-            <div
-              className="col-md-10 col-sm-12 float-right pl-5 d-md-block d-sm-none"
-              style={{ border: "2px solid red" }}
-            >
-              12 Wed 2022 23:02:12
+        <div className=" col-lg-3 col-md-4 ">
+          <div className="row  flex-row-reverse">
+            <div className="col-md-10 col-sm-12 float-right pl-5 d-md-block d-sm-none">
+              {join}
             </div>
           </div>
         </div>
-        <div
-          className="offset-0 col-md-2 order-last"
-          style={{ border: "1px solid blue" }}
-        >
-          <div className="row justify-content-end ">
-            <div className="col-md-1">
-              <ion-icon name="person-circle-outline"></ion-icon>
-            </div>
-            <div className="col-md-4">
-              <ion-icon name="log-out-outline"></ion-icon>
-            </div>
-          </div>
+        <div className=" col-md-2 order-last">
+          {login ? (
+            <>
+              <div className="row justify-content-end ">
+                <div className="col-md-1">
+                  <Link to="/profile">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                  </Link>
+                </div>
+                <div className="offset-2 col-md-4" onClick={() => logout()}>
+                  <ion-icon name="log-out-outline"></ion-icon>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="row justify-content-end ">
+                <div className="col-md-4">
+                  <Link to="/login">
+                    <ion-icon name="log-in-outline"></ion-icon>
+                  </Link>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

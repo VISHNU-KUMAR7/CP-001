@@ -1,3 +1,9 @@
 ion-icon {
   font-size: 30px;
 }
+.navTitleLink {
+  text-decoration: none;
+}
+.navTitle {
+  font-size: 17px;
+}

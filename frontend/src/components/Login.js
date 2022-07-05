@@ -71,7 +71,7 @@ const Login = () => {
                     </div>
 
                     <div className="form-group m-2">
-                      <label htmlFor="password">assword</label>
+                      <label htmlFor="password">Password</label>
                       <Field
                         id="password"
                         type="password"
