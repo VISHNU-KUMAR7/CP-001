@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import Header from "../components/Header";
 import { ProtectLoginRegister, ProtectUser } from "../protected/Protected";
 const Dashboard = lazy(() => import("../components/Dashboard"));
 const EditIssue = lazy(() => import("../components/EditIssue"));
@@ -16,6 +17,8 @@ const NotFound = lazy(() => import("../components/NotFound"));
 export default function routes() {
   return (
     <>
+      <Header />
+      
       <Routes>
         <Route
           path="/"
