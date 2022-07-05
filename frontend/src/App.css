@@ -7,3 +7,10 @@ ion-icon {
 .navTitle {
   font-size: 17px;
 }
+
+.logout {
+  color: blue;
+}
+.logout:hover{
+  cursor: pointer;
+}

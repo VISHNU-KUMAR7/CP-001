@@ -13,8 +13,8 @@ export default function Navbar() {
     navigate("/view");
   };
   return (
-    <div className={`${toggle}`} style={{ height: "95vh" }}>
-      <div className="row flex-column" style={{ height: "95vh" }}>
+    <div className={`${toggle} mt-2`} style={{ height: "94vh" }}>
+      <div className="row flex-column " style={{ height: "94vh" }}>
         <div className="col-12  " style={{ height: "6vh" }}>
           <div className="row justify-content-around offset-xl-1 my-auto">
             <div className="col-xl-3 col-lg-2 ">
@@ -67,7 +67,7 @@ export default function Navbar() {
                     <ion-icon name="person-outline"></ion-icon>
                   </Link>
                 </div>
-                <div className="col-lg-9 align-self-center">
+                <div className="col-lg-8 align-self-center">
                   <Link to="/profile" className="navTitleLink">
                     <span className="navTitle">
                       {data ? "" : "View Profile"}
@@ -76,13 +76,13 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="row justify-content-around offset-xl-1 mt-1">
-                <div className="col-xl-3 col-lg-2">
+                <div className="col-xl-3 col-lg-2 logout">
                   <ion-icon
                     name="log-out-outline"
                     onClick={() => logout()}
                   ></ion-icon>
                 </div>
-                <div className="col-lg-8 align-self-center ">
+                <div className="col-lg-8 align-self-center logout ">
                   <span className="navTitle" onClick={() => logout()}>
                     {data ? "" : "Logout"}
                   </span>
@@ -96,12 +96,12 @@ export default function Navbar() {
             <div className="col-12  " style={{ height: "6vh" }}>
               <div className="row justify-content-around offset-xl-1 my-auto">
                 <div className="col-xl-3 col-lg-2">
-                  <Link to="/login">
+                  <Link to="/login" className="logout">
                     <ion-icon name="log-in-outline"></ion-icon>
                   </Link>
                 </div>
                 <div className="col-lg-8 align-self-center">
-                  <Link to="/login" className="navTitleLink">
+                  <Link to="/login" className="navTitleLink ">
                     <span className="navTitle">{data ? "" : "Login"}</span>
                   </Link>
                 </div>

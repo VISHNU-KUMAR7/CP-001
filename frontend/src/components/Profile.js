@@ -15,7 +15,8 @@ export default function Profile() {
     dispatch(getProfile({ eMail: localStorage.getItem("eMail") }));
   }, []);
 
-  return (
+  return (<>
+   
     <div className="row flex-column " style={{ border: "1px solid black" }}>
       <div className="col-md-5 m-auto" style={{ border: "1px solid blue" }}>
         <img
@@ -49,5 +50,6 @@ export default function Profile() {
         </div>
       </div>
     </div>
+    </>
   );
 }

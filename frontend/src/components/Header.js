@@ -23,7 +23,10 @@ export default function Header() {
 
   return (
     <>
-      <div className="row">
+      <div
+        className="row sticky-top"
+        style={{ position: "static", position: "-webkit-sticky", top: "0" }}
+      >
         <div className="col-sm-1 d-inline">
           <ion-icon
             name="menu-outline"
@@ -60,7 +63,10 @@ export default function Header() {
                     <ion-icon name="person-circle-outline"></ion-icon>
                   </Link>
                 </div>
-                <div className="offset-2 col-md-4" onClick={() => logout()}>
+                <div
+                  className="offset-2 col-md-4 logout"
+                  onClick={() => logout()}
+                >
                   <ion-icon name="log-out-outline"></ion-icon>
                 </div>
               </div>

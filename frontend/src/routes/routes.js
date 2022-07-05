@@ -24,7 +24,7 @@ export default function RoutesFun() {
       <Header />
       <div className="row">
         <Navbar />
-        <div className={toggle}>
+        <div className={` ${toggle}`}>
           <Routes>
             <Route
               path="/"
