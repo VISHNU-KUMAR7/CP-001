@@ -10,10 +10,15 @@ function* addUser({ values }) {
   const data = yield userApi.newUser(values).then((data) => data);
   yield put({ type: "REGISTER_STATUS", data });
 }
+function* profileUser({ values }) {
+  const data = yield userApi.profileUser(values).then((data) => data);
+  yield put({ type: "PROFILE_STATUS", ...data });
+}
 
 function* userSaga() {
   yield takeEvery("LOGIN", getUser);
   yield takeEvery("REGISTER", addUser);
+  yield takeEvery("PROFILE", profileUser);
 }
 
 export default userSaga;

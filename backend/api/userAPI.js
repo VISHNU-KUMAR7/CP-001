@@ -75,6 +75,20 @@ class userAPI {
     });
   }
 
+  static profileUser({ eMail }) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await userModel.findOne({ eMail: eMail });
+        console.log(response);
+        resolve(response);
+      } catch (error) {
+        //send the toster with sutible error
+        reject(error);
+        console.log(error);
+      }
+    });
+  }
+
   static getIssueByUser() {
     return new Promise(async (resolve, reject) => {
       try {

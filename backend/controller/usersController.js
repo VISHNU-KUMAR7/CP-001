@@ -19,6 +19,16 @@ const loginUserController = (req, res, next) => {
     res.status(301).send({ ...error, status: "fail" });
   }
 };
+const profileUserController = (req, res, next) => {
+  try {
+    userAPI
+      .profileUser(req.body)
+      .then((data) => res.status(201).send({ data }))
+      .catch((error) => res.status(301).send({ ...error, status: "fail" }));
+  } catch (error) {
+    res.status(301).send({ ...error, status: "fail" });
+  }
+};
 const getIssueByUserController = (req, res, next) => {
   try {
     userAPI
@@ -32,5 +42,6 @@ const getIssueByUserController = (req, res, next) => {
 module.exports = {
   registerUserController,
   loginUserController,
+  profileUserController,
   getIssueByUserController,
 };

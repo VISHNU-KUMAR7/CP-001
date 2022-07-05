@@ -28,6 +28,20 @@ class userApi {
       }
     });
   }
+
+  static profileUser(data) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3001/users/profileUser",
+          data
+        );
+        resolve(response.data);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 }
 
 export default userApi;
