@@ -11,6 +11,7 @@ const ViewIssue = lazy(() => import("../components/ViewIssue"));
 const DetailIssue = lazy(() => import("../components/DetailIssue"));
 const Register = lazy(() => import("../components/Register"));
 const Login = lazy(() => import("../components/Login"));
+const Logout = lazy(() => import("../components/Logout"));
 const Profile = lazy(() => import("../components/Profile"));
 const Help = lazy(() => import("../components/Help"));
 const About = lazy(() => import("../components/About"));
@@ -76,7 +77,7 @@ export default function RoutesFun() {
               element={
                 <Suspense fallback={<span>Please Wait....</span>}>
                   {" "}
-                  <ProtectLoginRegister Cmp={Register} />
+                  <ProtectUser Cmp={Register} />
                 </Suspense>
               }
             />
@@ -85,7 +86,17 @@ export default function RoutesFun() {
               element={
                 <Suspense fallback={<span>Please Wait....</span>}>
                   {" "}
-                  <ProtectLoginRegister Cmp={Login} />
+                  <ProtectUser Cmp={Login} />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/logout"
+              element={
+                <Suspense fallback={<span>Please Wait....</span>}>
+                  {" "}
+                  <Logout />
+                  {/* <ProtectLoginRegister Cmp={Logout} /> */}
                 </Suspense>
               }
             />

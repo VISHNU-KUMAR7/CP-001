@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { bar } from "../redux/action/cssAction";
@@ -10,23 +10,21 @@ export default function Header() {
   const fName = "Gest";
   const wish = "Morning";
   const join = "12 Wed 2022 23:02:12";
-  const { token, eMail, status } = useSelector((state) => state.userData);
+  // const { token, eMail, status } = useSelector((state) => state.userData);
   const login = localStorage.getItem("eMail");
   const toggle = () => {
     data ? dispatch(bar(0)) : dispatch(bar(1));
   };
   const logout = () => {
-    console.log("logout");
-    localStorage.clear();
-    navigate("/login");
+    if (window.confirm("Do you want to logout from this page")) {
+      localStorage.clear();
+      navigate("/logout");
+    }
   };
 
   return (
     <>
-      <div
-        className="row sticky-top"
-        style={{ position: "static", position: "-webkit-sticky", top: "0" }}
-      >
+      <div className="row sticky-top">
         <div className="col-sm-1 d-inline">
           <ion-icon
             name="menu-outline"

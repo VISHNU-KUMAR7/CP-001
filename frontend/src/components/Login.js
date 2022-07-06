@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <>
-      <ToastContainer /> Login
+      <ToastContainer /> 
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-6 align-self-center mt-5 pt-5 border border-dark border-4 rounded rounded-2">
