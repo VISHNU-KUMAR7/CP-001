@@ -36,17 +36,21 @@ class userAPI {
     });
   }
 
-  static loginUser({ password, eMail }) {
+  static loginUser({ password, eMail, cat }) {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await userModel.findOne({ eMail: eMail });
-        // console.log(eMail);
         if (response) {
+          const { fName } = response;
+          const catCheck = cat === response.cat ? true : false;
+          console.log(
+            `cat getting the value ${cat} and from database ${response} and comparing ${catCheck}`
+          );
           const unHashPassword = await bcrypt.compare(
             password,
             response.password
           );
-          unHashPassword
+          unHashPassword && catCheck
             ? jwt.sign(
                 { response },
                 process.env.JWT_KEY,
@@ -58,14 +62,16 @@ class userAPI {
                     unHashPassword,
                     token,
                     eMail,
+                    cat,
+                    fName,
                     status: "Login Sucessfully!",
                   });
                 }
               )
             : resolve({ status: "Wronge Password!" });
         } else {
-          console.log("Wronge Email");
-          resolve({ status: "Wronge Email!" });
+          console.log("Something Wrong");
+          resolve({ status: "Something Wrong!" });
         }
       } catch (error) {
         //send the toster with sutible error

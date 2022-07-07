@@ -12,12 +12,16 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, eMail, status } = useSelector((state) => state.userData);
+  const { token, eMail, status, fName, cat } = useSelector(
+    (state) => state.userData
+  );
 
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);
       localStorage.setItem("eMail", eMail);
+      localStorage.setItem("fName", fName);
+      localStorage.setItem("cat", cat);
       navigate("/");
     }
     toast(status);
@@ -26,15 +30,20 @@ const Login = () => {
   const initialValues = {
     password: "",
     eMail: "",
+    cat: "",
   };
   const onSubmit = (values, onSubmitProps) => {
+    console.log("0 values from loginform", values);
     dispatch(login(values));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
 
   const validationSchema = Yup.object({
-    password: Yup.string().required("Password is required!"),
+    password: Yup.string()
+      .min(8, "Password Must be Eight characters long!")
+      .max(20, "Too Long!")
+      .required("Password is required!"),
     eMail: Yup.string().required("Email is required!"),
   });
 
@@ -82,12 +91,20 @@ const Login = () => {
                       />
                       <ErrorMessage name="password" component={ErrorMsg} />{" "}
                     </div>
+                    <div className="form-group m-2">
+                      <label htmlFor="password">Login as </label>
+                      <Field id="cat" value="user" name="cat" type="radio" />
+                      <label htmlFor="male">user</label>
+                      <Field id="cat" value="admin" name="cat" type="radio" />
+                      <label htmlFor="male">Admin</label>
+                      <ErrorMessage name="password" component={ErrorMsg} />{" "}
+                    </div>
 
                     <div className="row justify-content-center my-3">
                       <div className="col-md-4 col-sm-3">
                         <button
                           type="button"
-                          className="btn btn-primary"
+                          className="btn btn-primary m-md-3"
                           style={{
                             borderColor: "#FF5349",
                             backgroundColor: "#FF5349",
@@ -100,10 +117,10 @@ const Login = () => {
                         </button>
                       </div>
 
-                      <div className="col-md-4 col-sm-3">
+                      <div className="col-md-6 col-sm-3">
                         <button
                           type="Submit"
-                          className="btn"
+                          className="btn m-md-3"
                           style={{
                             backgroundColor: "#FF5349",
                             borderColor: "#FF5349",

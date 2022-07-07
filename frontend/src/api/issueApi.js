@@ -7,6 +7,7 @@ class issueApi {
           "http://localhost:3001/issues/getIssueByUser",
           data
         );
+        console.log(response);
         resolve(response);
       } catch (e) {
         reject(e);

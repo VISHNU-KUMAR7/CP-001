@@ -1,5 +1,8 @@
 var express = require("express");
-const { IssuesMiddleware } = require("../middleware/issuesMiddleware");
+const {
+  IssuesMiddleware,
+  userByIssue,
+} = require("../middleware/issuesMiddleware");
 const {
   getIssueByUserController,
   getAllIssuesController,
@@ -12,6 +15,7 @@ const {
 } = require("../controller/issuesController.js");
 var router = express.Router();
 // router.use(IssuesMiddleware);
+router.use("/getIssueByUser", userByIssue);
 
 /* GET users listing. */
 router.post("/getIssueByUser", getIssueByUserController);

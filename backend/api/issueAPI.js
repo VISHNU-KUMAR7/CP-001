@@ -16,6 +16,17 @@ class issueAPI {
       }
     });
   }
+
+  static getIssueByAdmin({ skip, limit }) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await issuesModel.find().skip(skip).limit(limit);
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
   static getAllIssues({ eMail, skip, limit }) {
     return new Promise(async (resolve, reject) => {
       try {

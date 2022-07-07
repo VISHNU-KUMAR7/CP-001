@@ -2,6 +2,8 @@ import axios from "axios";
 
 class userApi {
   static getAllUser(data) {
+    console.log("2 values from API", data);
+
     return new Promise(async (resolve, reject) => {
       try {
         const response = await axios.post(

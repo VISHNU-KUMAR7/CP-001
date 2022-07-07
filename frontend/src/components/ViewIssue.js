@@ -20,9 +20,10 @@ export default function ViewIssue() {
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimitPage] = useState(10);
   const eMail = localStorage.getItem("eMail");
+  const cat = localStorage.getItem("cat");
   const [cardTable, setCardTable] = useState(0);
   useEffect(() => {
-    dispatch(getIssue({ eMail, limit, skip: currentPage * limit }));
+    dispatch(getIssue({ eMail, cat, limit, skip: currentPage * limit }));
   }, [limit]);
   const searchText = (e) => {
     if (e.target.value.length !== 0) {

@@ -2,6 +2,8 @@ import { takeEvery, put } from "redux-saga/effects";
 import userApi from "../../api/userApi";
 
 function* getUser({ values }) {
+  console.log("2 values from saga", values);
+
   const data = yield userApi.getAllUser(values).then((data) => data);
   yield put({ type: "LOGIN_STATUS", ...data });
 }

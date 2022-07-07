@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { bar } from "../redux/action/cssAction";
+import { getProfile } from "../redux/action/userAction";
 
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.cssData);
-  const fName = "Gest";
-  const wish = "Morning";
-  const join = "12 Wed 2022 23:02:12";
-  // const { token, eMail, status } = useSelector((state) => state.userData);
+  let [date, setDate] = useState(new Date());
+  let [wish, setWish] = useState("");
+  useEffect(() => {
+    setInterval(() => setDate(new Date()), 1000);
+    var curHr = date.getHours();
+    if (curHr < 12) {
+      setWish("Morning");
+    } else if (curHr < 18) {
+      setWish("Afternoon");
+    } else {
+      setWish("Evening");
+    }
+  });
   const login = localStorage.getItem("eMail");
+  const fName = localStorage.getItem("fName");
   const toggle = () => {
     data ? dispatch(bar(0)) : dispatch(bar(1));
   };
@@ -34,29 +45,32 @@ export default function Header() {
             }}
           ></ion-icon>
         </div>
-        <div className="col-sm-2">
+        <div className="col-sm-2 ">
           <div className="row">
-            <div className="col-sm-1">
-              <ion-icon name="logo-apple-ar"></ion-icon>
+            <div className="col-sm-1 align-self-center">
+              <ion-icon
+                className="align-self-center"
+                name="logo-apple-ar"
+              ></ion-icon>
             </div>
-            <div className="offset-sm-1 col-sm-3">Brand</div>
+            <div className="offset-sm-1 col-sm-3 align-self-center">Brand</div>
           </div>
         </div>
-        <div className=" col-md-2 offset-lg-2   offset-md-0  ">
-          Good {wish} {fName}
+        <div className=" col-lg-3 col-md-3 offset-lg-1 offset-md-0  align-self-center ">
+          Good {wish} {fName ? fName : "Guest"}
         </div>
-        <div className=" col-lg-3 col-md-4 ">
-          <div className="row  flex-row-reverse">
-            <div className="col-md-10 col-sm-12 float-right pl-5 d-md-block d-sm-none">
-              {join}
+        <div className=" col-lg-3 col-md-4 align-self-center ">
+          <div className="row  flex-row-reverse ">
+            <div className="col-md-10 col-sm-12 float-right pl-lg-5   d-md-block d-sm-none">
+              {date.toLocaleDateString("es-CL")} [ {date.toLocaleTimeString()} ]
             </div>
           </div>
         </div>
-        <div className=" col-md-2 order-last">
+        <div className=" col-lg-2 col-md-1 offset-md-1order-last align-self-center ">
           {login ? (
             <>
               <div className="row justify-content-end ">
-                <div className="col-md-1">
+                <div className="col-md-1 ">
                   <Link to="/profile">
                     <ion-icon name="person-circle-outline"></ion-icon>
                   </Link>
