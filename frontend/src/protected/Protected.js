@@ -6,7 +6,7 @@ export function ProtectUser(props) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const eMail = localStorage.getItem("eMail");
-    console.log(eMail, token);
+    // console.log(eMail, token);
     if (eMail === null && token === null) {
       navigate("/login");
     }

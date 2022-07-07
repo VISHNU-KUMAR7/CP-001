@@ -1,20 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ErrorMsg from "./error/ErrorMsg";
-import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+// import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addIssue, editIssue } from "../redux/action/issueAction";
-import EditIssue from "./EditIssue";
 
 export default function Forms(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const eMail = localStorage.getItem("eMail");
   const { data } = props;
-  console.log(data);
   // const { description, _id, severity, status } = data;
   const initialValues = {
     description: data ? data.description : "",
@@ -28,7 +26,11 @@ export default function Forms(props) {
       : dispatch(addIssue({ ...values, eMail }));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    navigate(-1);
+    // navigate(-1);
+    if (data && values) {
+      // toast("Update data sucessfully");
+      navigate("/viewIssue", { state: { toast: "Update data sucessfully" } });
+    }
   };
 
   const validationSchema = Yup.object({
@@ -38,7 +40,7 @@ export default function Forms(props) {
   });
   return (
     <>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-6 align-self-center mt-5 pt-5 border border-dark border-4 rounded rounded-2">

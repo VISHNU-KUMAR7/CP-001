@@ -6,6 +6,7 @@ import { login } from "../redux/action/userAction";
 import ErrorMsg from "./error/ErrorMsg";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -39,7 +40,7 @@ const Login = () => {
 
   return (
     <>
-      <ToastContainer /> 
+      <ToastContainer />
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-6 align-self-center mt-5 pt-5 border border-dark border-4 rounded rounded-2">
@@ -83,7 +84,7 @@ const Login = () => {
                     </div>
 
                     <div className="row justify-content-center my-3">
-                      <div className="col-md-4 ">
+                      <div className="col-md-4 col-sm-3">
                         <button
                           type="button"
                           className="btn btn-primary"
@@ -99,7 +100,7 @@ const Login = () => {
                         </button>
                       </div>
 
-                      <div className="col-md-4">
+                      <div className="col-md-4 col-sm-3">
                         <button
                           type="Submit"
                           className="btn"
@@ -123,6 +124,12 @@ const Login = () => {
                 );
               }}
             </Formik>
+            <div className="row justify-content-center my-md-2">
+              <div className="col-xl-7 col-lg-10 col-md-12">
+                New to Dashboard?{" "}
+                <Link to="/register"> Create an account.</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

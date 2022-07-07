@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
   eMail: { type: String, require: true, trim: true, unique: true },
   phoneNo: { type: String, require: true, trim: true },
   location: { type: String, require: true, trim: true },
+  cat: { type: String, default: "user" },
   join: { type: Date, default: Date.now },
 });
 

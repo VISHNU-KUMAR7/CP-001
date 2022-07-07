@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
-import { ProtectLoginRegister, ProtectUser } from "../protected/Protected";
+import { ProtectUser } from "../protected/Protected";
 const Dashboard = lazy(() => import("../components/Dashboard"));
 const EditIssue = lazy(() => import("../components/EditIssue"));
 const AddIssue = lazy(() => import("../components/AddIssue"));

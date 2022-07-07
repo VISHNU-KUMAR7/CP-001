@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ErrorMsg from "./error/ErrorMsg";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/action/userAction";
@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Forms(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const { status, token, eMail } = useSelector((state) => state.userData);
 
   useEffect(() => {
@@ -91,6 +91,18 @@ export default function Forms(props) {
                     </div>
 
                     <div className="form-group m-2">
+                      <label htmlFor="eMail">Email Id</label>
+                      <Field
+                        id="eMail"
+                        name="eMail"
+                        placeholder="Email Id"
+                        className="eMail form-control"
+                        type="eMail"
+                      />
+                      <ErrorMessage name="eMail" component={ErrorMsg} />
+                    </div>
+
+                    <div className="form-group m-2">
                       <label htmlFor="password">Password</label>
                       <Field
                         id="password"
@@ -103,15 +115,15 @@ export default function Forms(props) {
                     </div>
 
                     <div className="form-group m-2">
-                      <label htmlFor="eMail">Email Id</label>
+                      <label htmlFor="password">Confirm Password</label>
                       <Field
-                        id="eMail"
-                        name="eMail"
-                        placeholder="Email Id"
-                        className="eMail form-control"
-                        type="eMail"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        className="password form-control"
+                        type="password"
                       />
-                      <ErrorMessage name="eMail" component={ErrorMsg} />
+                      <ErrorMessage name="password" component={ErrorMsg} />
                     </div>
 
                     <div className="form-group m-2">
