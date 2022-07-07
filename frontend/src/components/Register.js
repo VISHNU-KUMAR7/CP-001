@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ErrorMsg from "./error/ErrorMsg";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/action/userAction";
@@ -193,6 +193,11 @@ export default function Forms(props) {
                 );
               }}
             </Formik>
+            <div className="row justify-content-center my-md-2">
+              <div className="col-xl-7 col-lg-10 col-md-12">
+                Already have a Dashboard? <Link to="/login"> Login.</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

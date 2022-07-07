@@ -39,7 +39,7 @@ export default function Card(props) {
               <></>
             )}
             <h6 className="card-title">Action:</h6>
-            {eMail === localStorage.getItem("eMail") && cat === "admin" ? (
+            {eMail === localStorage.getItem("eMail") ? (
               <>
                 <Link
                   to="/editIssue"

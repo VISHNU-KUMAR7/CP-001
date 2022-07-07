@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getTotalIssueByUser } from "../redux/action/userAction";
-import { ResponsiveContainer, PieChart, Pie } from "recharts";
+import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 export default function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,56 +20,40 @@ export default function Dashboard() {
 
   const data01 = [
     {
+      index: 1,
       name: "Group A",
-      value: 400,
+      value: totalIssue.totIssuesCri,
     },
     {
+      index: 2,
       name: "Group B",
-      value: 300,
+      value: totalIssue.totIssuesMinor,
     },
     {
+      index: 3,
       name: "Group C",
-      value: 300,
-    },
-    {
-      name: "Group D",
-      value: 200,
-    },
-    {
-      name: "Group E",
-      value: 278,
-    },
-    {
-      name: "Group F",
-      value: 189,
+      value: totalIssue.totIssuesMajor,
     },
   ];
+  const color01 = ["#0066ff", "#ff3399", "#99ff66"];
   const data02 = [
     {
+      index: 1,
       name: "Group A",
-      value: 2400,
+      value: totalIssue.totIssuesClose,
     },
     {
+      index: 2,
       name: "Group B",
-      value: 4567,
+      value: totalIssue.totIssuesOpen,
     },
     {
+      index: 3,
       name: "Group C",
-      value: 1398,
-    },
-    {
-      name: "Group D",
-      value: 9800,
-    },
-    {
-      name: "Group E",
-      value: 3908,
-    },
-    {
-      name: "Group F",
-      value: 4800,
+      value: totalIssue.totIssuesInp,
     },
   ];
+  const color02 = ["#9933ff", "#cc6600", "#66ffcc"];
 
   // const logout = (e) => {
   //   console.log(
@@ -84,29 +68,131 @@ export default function Dashboard() {
     <>
       <div className="row border border-info border-2 rounded  px-lg-5 py-auto px-md-3 px-sm-2 justify-content-center text-bg-secondary">
         {/* <div className="d-fill border border-info border-2"></div> */}
-        <div className="col-xl-2 offset-xl-4 col-lg-4 offset-lg-2 col-md-3 offset-md-2 text-bg-light border border-info border-2 rounded ">
+        <div className="col-xl-2 offset-xl-4 col-lg-4 offset-lg-2 col-md-3 offset-md-2 my-lg-3 my-md-2 my-sm-1 text-bg-light border border-info border-2 rounded ">
           Welcome To Dashboard
         </div>
-        <div className="col-lg-3 offset-lg-1">
+        <div className="col-lg-3 offset-lg-1  my-lg-3 my-md-2 my-sm-1">
           Total Issue: {totalIssue.totIssues}
         </div>
       </div>
       <div className="row justify-content-evenly ">
-        <div className="col-md-3 border border-info border-3 rounded h-100">
-          <PieChart style={{ position: "relative" }} width={250} height={250}>
-            <Pie
-              data={data02}
-              dataKey="value"
-              nameKey="name"
-              innerRadius={60}
-              outerRadius={80}
-              fill="#82ca9d"
-              labeel
-            />
-          </PieChart>
+        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2">
+          <h3 className="mx-5">Severity </h3>
+          <hr />
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart style={{ position: "relative" }}>
+              <Pie
+                data={data02}
+                dataKey="value"
+                nameKey="name"
+                innerRadius={50}
+                outerRadius={80}
+                fill="#82ca9d"
+                label
+              >
+                {data02.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={color02[index]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="row justify-content-between">
+            <div className="col-md-3  m-0 p-0">
+              <div className="row ml-md-5 justify-content-end">
+                <div
+                  className="col-md-1 w-10 h-10"
+                  style={{ backgroundColor: "#9933ff" }}
+                ></div>
+                <div className="col-md-8">
+                  Close:
+                  {totalIssue.totIssuesClose}
+                </div>
+              </div>
+            </div>
+            <div className="col-md-3 ">
+              <div className="row ml-md-5 justify-content-end">
+                <div
+                  className="col-md-1 w-10 h-10"
+                  style={{ backgroundColor: "#cc6600" }}
+                ></div>
+                <div className="col-md-8">
+                  {" "}
+                  Open: {totalIssue.totIssuesOpen}{" "}
+                </div>
+              </div>
+            </div>
+            <div className="col-md-5 ">
+              <div className="row ml-md-5 justify-content-end">
+                <div
+                  className="col-md-1 w-10 h-10"
+                  style={{ backgroundColor: "#66ffcc" }}
+                ></div>
+                <div className="col-md-8">
+                  {" "}
+                  Inprogress: {totalIssue.totIssuesInp}{" "}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="col-md-3"></div>
-        <div className="col-md-3"></div>
+        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2">
+          <h3 className="mx-5">Status </h3>
+          <hr />
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart style={{ position: "relative" }}>
+              <Pie
+                data={data01}
+                dataKey="value"
+                nameKey="name"
+                innerRadius={50}
+                outerRadius={80}
+                fill="#82ca9d"
+                label
+              >
+                {data01.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={color01[index]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="row justify-content-between">
+            <div className="col-lg-4  m-0 p-0">
+              <div className="row ml-md-5 justify-content-end">
+                <div
+                  className="col-md-1  w-10 h-10"
+                  style={{ backgroundColor: "#0066ff" }}
+                ></div>
+                <div className="col-md-8">
+                  Ciritical: {totalIssue.totIssuesCri}
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 ">
+              <div className="row ml-md-5 justify-content-end">
+                <div
+                  className="col-md-1  w-10 h-10"
+                  style={{ backgroundColor: "#ff3399" }}
+                ></div>
+                <div className="col-md-8">
+                  {" "}
+                  Minor: {totalIssue.totIssuesMinor}
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 ">
+              <div className="row ml-md-5 justify-content-end">
+                <div
+                  className="col-md-1  rounded w-10 h-10"
+                  style={{ backgroundColor: "#99ff66" }}
+                ></div>
+                <div className="col-md-8">
+                  {" "}
+                  Major: {totalIssue.totIssuesMajor}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
