@@ -45,6 +45,7 @@ const Login = () => {
       .max(20, "Too Long!")
       .required("Password is required!"),
     eMail: Yup.string().required("Email is required!"),
+    cat: Yup.string().required("Login as ??"),
   });
 
   return (
@@ -97,7 +98,7 @@ const Login = () => {
                       <label htmlFor="male">user</label>
                       <Field id="cat" value="admin" name="cat" type="radio" />
                       <label htmlFor="male">Admin</label>
-                      <ErrorMessage name="password" component={ErrorMsg} />{" "}
+                      <ErrorMessage name="cat" component={ErrorMsg} />{" "}
                     </div>
 
                     <div className="row justify-content-center my-3">

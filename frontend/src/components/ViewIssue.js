@@ -17,6 +17,7 @@ export default function ViewIssue() {
   // }
   const dispatch = useDispatch();
   const result = useSelector((state) => state.issueData);
+  console.log(result);
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimitPage] = useState(10);
   const eMail = localStorage.getItem("eMail");
@@ -109,13 +110,14 @@ export default function ViewIssue() {
       <div className="row border border-danger border-2 rounded mx-1  justify-content-center align-content-between">
         {cardTable ? (
           <>
-            {result.map(({ description, severity, status, _id }) => (
+            {result.map(({ description, eMail, severity, status, _id }) => (
               <Card
                 key={_id}
                 _id={_id}
                 description={description}
                 severity={severity}
                 status={status}
+                eMail={eMail}
               />
             ))}
           </>
@@ -128,17 +130,19 @@ export default function ViewIssue() {
                   <th scope="col">Description</th>
                   <th scope="col">Severity</th>
                   <th scope="col">Status</th>
+                  {cat === "admin" ? <th scope="col">UserId</th> : ""}
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                {result.map(({ description, severity, status, _id }) => (
+                {result.map(({ description, eMail, severity, status, _id }) => (
                   <Table
                     key={_id}
                     _id={_id}
                     description={description}
                     severity={severity}
                     status={status}
+                    eMail={eMail}
                   />
                 ))}
               </tbody>

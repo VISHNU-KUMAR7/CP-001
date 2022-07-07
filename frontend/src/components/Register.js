@@ -30,8 +30,10 @@ export default function Forms(props) {
     eMail: "",
     phoneNo: "",
     location: "",
+    cat: "user",
   };
   const onSubmit = (values, onSubmitProps) => {
+    console.log(values);
     dispatch(register(values));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);

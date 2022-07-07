@@ -6,7 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Card(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { _id, description, severity, status } = props;
+  const cat = localStorage.getItem("cat");
+  const { _id, description, severity, status, eMail } = props;
   const deleteIssue = async (e) => {
     if (window.confirm(`R u want to delet ${_id}`)) {
       dispatch(delIssue({ _id }));
@@ -29,13 +30,28 @@ export default function Card(props) {
             <span>{severity}</span>
             <h6 className="card-title">Status:</h6>
             <span>{status}</span>
-            <Link
-              to="/editIssue"
-              className="card-link text-success"
-              state={{ _id, description, severity, status }}
-            >
-              <ion-icon name="create-outline"></ion-icon>
-            </Link>
+            {cat === "admin" ? (
+              <>
+                <h6 className="card-title">UserId:</h6>
+                <span>{eMail}</span>
+              </>
+            ) : (
+              <></>
+            )}
+            <h6 className="card-title">Action:</h6>
+            {eMail === localStorage.getItem("eMail") && cat === "admin" ? (
+              <>
+                <Link
+                  to="/editIssue"
+                  className="card-link text-success d-inline-block"
+                  state={{ _id, description, severity, status }}
+                >
+                  <ion-icon name="create-outline"></ion-icon>
+                </Link>
+              </>
+            ) : (
+              <></>
+            )}
             <Link
               to="#"
               className="card-link text-danger"
