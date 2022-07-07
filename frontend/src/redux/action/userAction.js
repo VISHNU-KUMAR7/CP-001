@@ -8,3 +8,6 @@ export const register = (values) => {
 export const getProfile = (values) => {
   return { type: "PROFILE", values };
 };
+export const getTotalIssueByUser = (values) => {
+  return { type: "TOTAL_ISSUE", values };
+};

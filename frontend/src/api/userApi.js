@@ -17,6 +17,20 @@ class userApi {
     });
   }
 
+  static totalIssueByUser(data) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3001/users/totalIssueByUser",
+          data
+        );
+        resolve(response);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
   static newUser(data) {
     return new Promise(async (resolve, reject) => {
       try {

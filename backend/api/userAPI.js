@@ -1,4 +1,5 @@
 var userModel = require("../schema/userSchema.js");
+var issuesModel = require("../schema/issueSchema.js"); //for count issue
 var bcrypt = require("bcrypt");
 const SALT_ROUND = parseInt(process.env.SALT_ROUND);
 var jwt = require("jsonwebtoken");
@@ -104,6 +105,84 @@ class userAPI {
       } catch (error) {
         //send the toster with sutible error
         console.log(error);
+      }
+    });
+  }
+
+  static totalIssueByUser({ eMail }) {
+    console.log("from backedn api", eMail);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const totIssues = await issuesModel.find({ eMail: eMail }).count();
+        const totIssuesInp = await issuesModel
+          .find({ eMail: eMail, status: "inprogress" })
+          .count();
+        const totIssuesClose = await issuesModel
+          .find({ eMail: eMail, status: "close" })
+          .count();
+        const totIssuesOpen = await issuesModel
+          .find({ eMail: eMail, status: "open" })
+          .count();
+        const totIssuesCri = await issuesModel
+          .find({ eMail: eMail, severity: "critical" })
+          .count();
+        const totIssuesMinor = await issuesModel
+          .find({ eMail: eMail, severity: "minor" })
+          .count();
+        const totIssuesMajor = await issuesModel
+          .find({ eMail: eMail, severity: "major" })
+          .count();
+        const data = {
+          totIssues,
+          totIssuesInp,
+          totIssuesClose,
+          totIssuesOpen,
+          totIssuesCri,
+          totIssuesMinor,
+          totIssuesMajor,
+        };
+        console.log(data);
+        resolve(data);
+      } catch (e) {
+        resolve(e);
+      }
+    });
+  }
+
+  static totalIssueByAdmin() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const totIssues = await issuesModel.find().count();
+        const totIssuesInp = await issuesModel
+          .find({ status: "inprogress" })
+          .count();
+        const totIssuesClose = await issuesModel
+          .find({ status: "close" })
+          .count();
+        const totIssuesOpen = await issuesModel
+          .find({ status: "open" })
+          .count();
+        const totIssuesCri = await issuesModel
+          .find({ severity: "critical" })
+          .count();
+        const totIssuesMinor = await issuesModel
+          .find({ severity: "minor" })
+          .count();
+        const totIssuesMajor = await issuesModel
+          .find({ severity: "major" })
+          .count();
+        const data = {
+          totIssues,
+          totIssuesInp,
+          totIssuesClose,
+          totIssuesOpen,
+          totIssuesCri,
+          totIssuesMinor,
+          totIssuesMajor,
+        };
+        resolve(data);
+      } catch (e) {
+        resolve(e);
       }
     });
   }

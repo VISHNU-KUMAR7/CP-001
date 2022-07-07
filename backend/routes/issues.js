@@ -1,7 +1,8 @@
 var express = require("express");
 const {
   IssuesMiddleware,
-  userByIssue,
+  userByIssueMiddleware,
+  getIssuesBySearchMiddleware,
 } = require("../middleware/issuesMiddleware");
 const {
   getIssueByUserController,
@@ -15,7 +16,8 @@ const {
 } = require("../controller/issuesController.js");
 var router = express.Router();
 // router.use(IssuesMiddleware);
-router.use("/getIssueByUser", userByIssue);
+router.use("/getIssueByUser", userByIssueMiddleware);
+router.use("/getIssuesBySearch", getIssuesBySearchMiddleware);
 
 /* GET users listing. */
 router.post("/getIssueByUser", getIssueByUserController);

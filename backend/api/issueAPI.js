@@ -2,7 +2,6 @@ var issuesModel = require("../schema/issueSchema.js");
 
 class issueAPI {
   static getIssueByUser({ eMail, skip, limit }) {
-    console.log({ eMail, skip, limit });
     return new Promise(async (resolve, reject) => {
       try {
         const response = await issuesModel
@@ -60,12 +59,6 @@ class issueAPI {
   static getIssuesBySearch({ eMail, searchItem, skip, limit }) {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log("Getteing the data for search", {
-          userEmail: eMail,
-          searchItem,
-          skip,
-          limit,
-        });
         const response = await issuesModel
           .find({
             eMail: eMail,
@@ -76,7 +69,26 @@ class issueAPI {
           })
           .skip(skip)
           .limit(limit);
-        console.log("Getting response", response);
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  static getIssuesBySearchByAdmin({ eMail, searchItem, skip, limit }) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await issuesModel
+          .find({
+            $or: [
+              { description: { $regex: searchItem, $options: "i" } },
+              { status: { $regex: searchItem, $options: "i" } },
+              { eMail: { $regex: searchItem, $options: "i" } },
+            ],
+          })
+          .skip(skip)
+          .limit(limit);
         resolve(response);
       } catch (error) {
         reject(error);

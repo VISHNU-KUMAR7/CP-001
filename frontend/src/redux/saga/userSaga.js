@@ -16,11 +16,16 @@ function* profileUser({ values }) {
   const data = yield userApi.profileUser(values).then((data) => data);
   yield put({ type: "PROFILE_STATUS", ...data });
 }
+function* totalIssueByUser({ values }) {
+  const data = yield userApi.totalIssueByUser(values).then((data) => data);
+  yield put({ type: "TOTAL_ISSUE_STATUS", ...data });
+}
 
 function* userSaga() {
   yield takeEvery("LOGIN", getUser);
   yield takeEvery("REGISTER", addUser);
   yield takeEvery("PROFILE", profileUser);
+  yield takeEvery("TOTAL_ISSUE", totalIssueByUser);
 }
 
 export default userSaga;

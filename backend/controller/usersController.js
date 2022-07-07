@@ -40,9 +40,21 @@ const getIssueByUserController = (req, res, next) => {
     res.status(301).send(error);
   }
 };
+const totalIssueByUserController = (req, res, next) => {
+  console.log("Data from controller ", req.body);
+  try {
+    userAPI
+      .totalIssueByUser(req.body)
+      .then((data) => res.status(201).send(data))
+      .catch((e) => res.status(201).send(e));
+  } catch (e) {
+    res.status(301).send(e);
+  }
+};
 module.exports = {
   registerUserController,
   loginUserController,
   profileUserController,
   getIssueByUserController,
+  totalIssueByUserController,
 };

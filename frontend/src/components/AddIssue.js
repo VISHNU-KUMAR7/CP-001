@@ -26,11 +26,7 @@ export default function Forms(props) {
       : dispatch(addIssue({ ...values, eMail }));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    // navigate(-1);
-    if (data && values) {
-      // toast("Update data sucessfully");
-      navigate("/viewIssue", { state: { toast: "Update data sucessfully" } });
-    }
+    navigate(-1);
   };
 
   const validationSchema = Yup.object({

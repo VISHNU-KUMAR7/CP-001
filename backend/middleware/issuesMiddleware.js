@@ -16,7 +16,7 @@ const IssuesMiddleware = (req, res, next) => {
     res.status(401).send({ result: "Token not Provided" });
   }
 };
-const userByIssue = (req, res, next) => {
+const userByIssueMiddleware = (req, res, next) => {
   console.log("this is from middleware", req.body);
   if (req.body.cat === "admin") {
     console.log("this is admin");
@@ -32,7 +32,6 @@ const userByIssue = (req, res, next) => {
   } else {
     next();
   }
-
   // this is used to check the given email Id is admin or not
   // 1st fetch the eMail, 2nd call the usersSchema to check the cat of same eMail.
   // 3rd from 2nd I will get cat of eMail
@@ -40,4 +39,25 @@ const userByIssue = (req, res, next) => {
   // so this process is flop.
   // from here I move to login.js page and add 2 button with value "user" and "admin"
 };
-module.exports = { IssuesMiddleware, userByIssue };
+const getIssuesBySearchMiddleware = (req, res, next) => {
+  console.log("this is from middleware", req.body);
+  if (req.body.cat === "admin") {
+    console.log("this is admin");
+    try {
+      issueAPI
+        .getIssuesBySearchByAdmin(req.body)
+        .then((data) => res.status(200).send(data))
+        .catch((error) => res.status(400).send(error));
+    } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+    }
+  } else {
+    next();
+  }
+};
+module.exports = {
+  IssuesMiddleware,
+  userByIssueMiddleware,
+  getIssuesBySearchMiddleware,
+};
