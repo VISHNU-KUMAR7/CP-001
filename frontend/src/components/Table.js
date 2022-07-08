@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { delIssue } from "../redux/action/issueAction";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Table(props) {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function Table(props) {
   const deleteIssue = async (e) => {
     if (window.confirm(`R u want to delet ${_id}`)) {
       dispatch(delIssue({ _id }));
-      navigate("/viewIssue");
+      navigate(-1);
     }
   };
   return (
@@ -32,7 +32,12 @@ export default function Table(props) {
           <input type="checkbox" />
         </td>
         <th scope="row" className={`${idCol}`}>
-          {_id}
+          <Link
+            to={`/detailIssue/:${_id}`}
+            state={{ _id, description, severity, status }}
+          >
+            {_id}
+          </Link>
         </th>
         <td className={`${descCol}`}>{description}</td>
         <td className={`${severityCol}`}>

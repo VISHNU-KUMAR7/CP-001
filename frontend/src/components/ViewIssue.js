@@ -270,10 +270,10 @@ export default function ViewIssue() {
                     status={status}
                     eMail={eMail}
                     idCol={idCol}
-descCol={descCol}
-severityCol={severityCol}
-statusCol={statusCol}
-emailCol={emailCol}
+                    descCol={descCol}
+                    severityCol={severityCol}
+                    statusCol={statusCol}
+                    emailCol={emailCol}
                   />
                 ))}
               </tbody>
