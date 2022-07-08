@@ -29,6 +29,7 @@ export default function ViewIssue() {
   const [statusCol, setstatusCol] = useState("");
   const [emailCol, setemailCol] = useState("");
   const [pageCount, setPageCount] = useState(3);
+  const [checkAll, setCheckAll] = useState("");
 
   useEffect(() => {
     dispatch(getTotalIssueByUser({ eMail, cat }));
@@ -119,8 +120,6 @@ export default function ViewIssue() {
 
   return (
     <>
-      {/* searchItem */}
-      {/* <ToastContainer /> */}
       <div className="row border border-info border-1 rounded my-3 mx-1 py-1 align-items-baseline">
         <div className="col-md-2">View Issue</div>
         <div className="col-md-4 border border-0 rounded">
@@ -182,7 +181,9 @@ export default function ViewIssue() {
             <div className="col-lg-2 col-md-3 p-0  ">
               <Link to="/delete">
                 {" "}
-                <button className="btn btn-danger ">Delete</button>
+                <button className="btn btn-danger " disabled="disabled">
+                  Delete
+                </button>
               </Link>
             </div>
             <div className="col-lg-2  col-md-4 p-0 m-0 ">
@@ -217,6 +218,7 @@ export default function ViewIssue() {
       {/* view card/Issue */}
       <div className="row  mx-1  justify-content-center align-content-between">
         {cardTable ? (
+          // card view
           <>
             {result.map(({ description, eMail, severity, status, _id }) => (
               <Card
@@ -230,12 +232,20 @@ export default function ViewIssue() {
             ))}
           </>
         ) : (
+          // table view
           <>
             <table className="table text-white  ">
               <thead>
                 <tr>
                   <th>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      onClick={() =>
+                        checkAll === ""
+                          ? setCheckAll("checked")
+                          : setCheckAll("")
+                      }
+                    />
                   </th>
                   <th scope="col" className={`${idCol}`}>
                     Id
@@ -264,7 +274,7 @@ export default function ViewIssue() {
                   <Table
                     key={_id}
                     _id={_id}
-                    check={"checkOne"}
+                    check={checkAll}
                     description={description}
                     severity={severity}
                     status={status}

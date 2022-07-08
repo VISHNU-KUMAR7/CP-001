@@ -24,7 +24,16 @@ export default function Card(props) {
           <h5 className="card-title">
             <input type="checkbox" />{" "}
           </h5>
-          <h6 className="card-header mb-2 text-muted">{_id}</h6>
+          <h6 className="card-header mb-2 text-muted">
+            <Link
+              to={`/detailIssue/:${_id}`}
+              state={{ _id, description, severity, status }}
+              className="navTitleLink"
+              style={{ color: "black" }}
+            >
+              {_id}
+            </Link>
+          </h6>
           <div className="card-body">
             <p className="card-text text-truncate">{description}</p>
             <div className="row">
@@ -41,7 +50,9 @@ export default function Card(props) {
                     {" "}
                     {severity === "minor" ? (
                       <>
-                        <span className="badge text-bg-success">{severity}</span>
+                        <span className="badge text-bg-success">
+                          {severity}
+                        </span>
                       </>
                     ) : (
                       <>

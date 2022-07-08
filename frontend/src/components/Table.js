@@ -13,6 +13,7 @@ export default function Table(props) {
     severity,
     status,
     eMail,
+    check,
     idCol,
     descCol,
     severityCol,
@@ -29,12 +30,14 @@ export default function Table(props) {
     <>
       <tr>
         <td>
-          <input type="checkbox" />
+          <input type="checkbox" checked={`${check}`} />
         </td>
         <th scope="row" className={`${idCol}`}>
           <Link
             to={`/detailIssue/:${_id}`}
             state={{ _id, description, severity, status }}
+            className="navTitleLink"
+            style={{ color: "white" }}
           >
             {_id}
           </Link>

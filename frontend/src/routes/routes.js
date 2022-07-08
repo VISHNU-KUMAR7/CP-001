@@ -24,9 +24,7 @@ export default function RoutesFun() {
       <Header />
       <div className="row">
         <Navbar />
-        <div
-          className={`border border-danger rounded text-bg-secondary  ${toggle}`}
-        >
+        <div className={`border border-danger rounded body  ${toggle}`}>
           <Routes>
             <Route
               path="/"
