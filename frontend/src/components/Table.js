@@ -18,9 +18,9 @@ export default function Table(props) {
     <>
       <tr>
         <th scope="row">{_id}</th>
-        <td>{description}</td>
-        <td>{severity}</td>
-        <td>{status}</td>
+        <td className="">{description}</td>
+        <td className="badge text-bg-info">{severity}</td>
+        <td className="badge text-bg-primary">{status}</td>
         {cat === "admin" ? <td>{eMail}</td> : ""}
         <td>
           <div className="row">

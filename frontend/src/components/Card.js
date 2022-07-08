@@ -18,49 +18,72 @@ export default function Card(props) {
     <>
       <div className="col-md-3 ">
         <div
-          className="card border border-danger border-2 rounded h-100 mb-5"
+          className="card border border-danger border-2 rounded text-bg-primary h-100 mb-5"
           key={_id}
         >
+          <h5 className="card-title">
+            <input type="checkbox" />{" "}
+          </h5>
+          <h6 className="card-header mb-2 text-muted">{_id}</h6>
           <div className="card-body ">
-            <h5 className="card-title">Issue ID </h5>
-            <h6 className="card-subtitle mb-2 text-muted">{_id}</h6>
-            <p className="card-text">{description}</p>
-
-            <h6 className="card-title">Severity:</h6>
-            <span>{severity}</span>
-            <h6 className="card-title">Status:</h6>
-            <span>{status}</span>
+            <p className="card-text text-truncate">{description}</p>
+            <div className="row">
+              <div className="col-lg-4 col-md-5 ">
+                <h6 className="card-title">Severity:</h6>
+              </div>
+              <div className="col-lg-8 col-md-6">
+                <span className="badge text-bg-info">{severity}</span>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-4 col-md-5 ">
+                <h6 className="card-title">Status:</h6>
+              </div>
+              <div className="col-lg-8 col-md-6">
+                <span className="badge text-bg-info">{status}</span>
+              </div>
+            </div>
             {cat === "admin" ? (
               <>
-                <h6 className="card-title">UserId:</h6>
-                <span>{eMail}</span>
+                <div className="row">
+                  <div className="col-lg-4 col-md-5 ">
+                    <h6 className="card-title">UserId:</h6>
+                  </div>
+                  <div className="col-lg-8 col-md-6">
+                    <span>{eMail}</span>
+                  </div>
+                </div>
               </>
             ) : (
               <></>
             )}
-            <h6 className="card-title">Action:</h6>
-            {eMail === localStorage.getItem("eMail") ? (
-              <>
+            <div className=" row">
+              <div className="card-title col-lg-4 col-md-5 ">Action: </div>
+              <div className="col-lg-8 col-md-6">
+                {eMail === localStorage.getItem("eMail") ? (
+                  <>
+                    <Link
+                      to="/editIssue"
+                      className="card-link text-success d-inline-block"
+                      state={{ _id, description, severity, status }}
+                    >
+                      <ion-icon name="create-outline"></ion-icon>
+                    </Link>
+                  </>
+                ) : (
+                  <></>
+                )}
                 <Link
-                  to="/editIssue"
-                  className="card-link text-success d-inline-block"
-                  state={{ _id, description, severity, status }}
+                  to="#"
+                  className="card-link text-danger"
+                  onClick={(e) => {
+                    deleteIssue(e);
+                  }}
                 >
-                  <ion-icon name="create-outline"></ion-icon>
+                  <ion-icon name="trash-outline"></ion-icon>
                 </Link>
-              </>
-            ) : (
-              <></>
-            )}
-            <Link
-              to="#"
-              className="card-link text-danger"
-              onClick={(e) => {
-                deleteIssue(e);
-              }}
-            >
-              <ion-icon name="trash-outline"></ion-icon>
-            </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

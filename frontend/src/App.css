@@ -11,6 +11,14 @@ ion-icon {
 .logout {
   color: blue;
 }
-.logout:hover{
+.logout:hover {
   cursor: pointer;
+}
+
+* {
+  transition: width 0.3s linear;
+}
+
+div {
+  transition: width 0.3s linear;
 }

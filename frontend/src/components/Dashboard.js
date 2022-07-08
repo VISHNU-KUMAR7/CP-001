@@ -66,19 +66,20 @@ export default function Dashboard() {
   // };
   return (
     <>
-      <div className="row border border-info border-2 rounded  px-lg-5 py-auto px-md-3 px-sm-2 justify-content-center text-bg-secondary">
-        {/* <div className="d-fill border border-info border-2"></div> */}
-        <div className="col-xl-2 offset-xl-4 col-lg-4 offset-lg-2 col-md-3 offset-md-2 my-lg-3 my-md-2 my-sm-1 text-bg-light border border-info border-2 rounded ">
+      <div className="row border border-info border-2 rounded  px-lg-5 py-auto px-md-3 px-sm-2 justify-content-center text-bg-light mt-lg-2 mx-lg-3">
+        <div className="col-xl-3 offset-xl-4 offset-lg-2 col-lg-8  col-md-3 offset-md-2 my-lg-2 my-md-2 ">
           Welcome To Dashboard
         </div>
-        <div className="col-lg-3 offset-lg-1  my-lg-3 my-md-2 my-sm-1">
+        <div className="offset-lg-1 col-lg-3   my-lg-3 my-md-2 my-sm-1">
           Total Issue: {totalIssue.totIssues}
         </div>
       </div>
       <div className="row justify-content-evenly ">
-        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2">
-          <h3 className="mx-5">Severity </h3>
-          <hr />
+        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2 text-bg-light">
+          <h3 className="mx-5 text-danger border-bottom border-danger pb-md-3">
+            Severity{" "}
+          </h3>
+          {/* <hr /> */}
           <ResponsiveContainer width="100%" height={300}>
             <PieChart style={{ position: "relative" }}>
               <Pie
@@ -135,9 +136,10 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2">
-          <h3 className="mx-5">Status </h3>
-          <hr />
+        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2 text-bg-light">
+          <h3 className="mx-5  text-danger border-bottom border-danger pb-md-3">
+            Status{" "}
+          </h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart style={{ position: "relative" }}>
               <Pie
