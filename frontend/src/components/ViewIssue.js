@@ -22,6 +22,12 @@ export default function ViewIssue() {
   const eMail = localStorage.getItem("eMail");
   const cat = localStorage.getItem("cat");
   const [cardTable, setCardTable] = useState(0);
+  const [filterBtn, setFilterBtn] = useState("");
+  const [idCol, setidCol] = useState("");
+  const [descCol, setdescCol] = useState("");
+  const [severityCol, setseverityCol] = useState("");
+  const [statusCol, setstatusCol] = useState("");
+  const [emailCol, setemailCol] = useState("");
   const [pageCount, setPageCount] = useState(3);
 
   useEffect(() => {
@@ -70,10 +76,45 @@ export default function ViewIssue() {
   const toggle = () => {
     if (cardTable === 0) {
       setCardTable(1);
+      setFilterBtn("d-none");
     } else {
       setCardTable(0);
+      setFilterBtn("");
     }
     // console.log(cardTable);
+  };
+  const hideCol = (e) => {
+    if (e.target.id === "1") {
+      if (idCol === "") {
+        setidCol("d-none");
+      } else {
+        setidCol("");
+      }
+    } else if (e.target.id === "2") {
+      if (descCol === "") {
+        setdescCol("d-none");
+      } else {
+        setdescCol("");
+      }
+    } else if (e.target.id === "3") {
+      if (severityCol === "") {
+        setseverityCol("d-none");
+      } else {
+        setseverityCol("");
+      }
+    } else if (e.target.id === "4") {
+      if (statusCol === "") {
+        setstatusCol("d-none");
+      } else {
+        setstatusCol("");
+      }
+    } else if (e.target.id === "5") {
+      if (emailCol === "") {
+        setemailCol("d-none");
+      } else {
+        setemailCol("");
+      }
+    }
   };
 
   return (
@@ -82,9 +123,9 @@ export default function ViewIssue() {
       {/* <ToastContainer /> */}
       <div className="row border border-info border-1 rounded my-3 mx-1 py-1 align-items-baseline">
         <div className="col-md-2">View Issue</div>
-        <div className="col-md-4">
+        <div className="col-md-4 border border-0 rounded">
           <input
-            className="w-100"
+            className="w-100 border border-0 rounded p-1"
             type={"text"}
             placeholder="Search by text"
             onChange={(e) => searchText(e)}
@@ -92,6 +133,52 @@ export default function ViewIssue() {
         </div>
         <div className="col-md-6">
           <div className="row justify-content-end">
+            <div className={`col-lg-2 ${filterBtn}`}>
+              <div className="dropdown ">
+                <button
+                  className="btn btn-primary dropdown-toggle "
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Filter
+                </button>
+                <ul
+                  className="dropdown-menu "
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  <li className="px-2">
+                    <input type="checkbox" id="1" onClick={(e) => hideCol(e)} />
+                    Id
+                  </li>
+                  <li className="px-2">
+                    <input type="checkbox" id="2" onClick={(e) => hideCol(e)} />
+                    Description
+                  </li>
+                  <li className="px-2">
+                    <input type="checkbox" id="3" onClick={(e) => hideCol(e)} />
+                    Severity
+                  </li>
+                  <li className="px-2">
+                    <input type="checkbox" id="4" onClick={(e) => hideCol(e)} />
+                    Status
+                  </li>
+                  {cat === "admin" ? (
+                    <li className="px-2">
+                      <input
+                        type="checkbox"
+                        id="5"
+                        onClick={(e) => hideCol(e)}
+                      />
+                      UserId
+                    </li>
+                  ) : (
+                    <></>
+                  )}
+                </ul>
+              </div>
+            </div>
             <div className="col-lg-2 col-md-3 p-0  ">
               <Link to="/delete">
                 {" "}
@@ -128,7 +215,7 @@ export default function ViewIssue() {
         </div>
       </div>
       {/* view card/Issue */}
-      <div className="row border border-danger border-2 rounded mx-1  justify-content-center align-content-between">
+      <div className="row  mx-1  justify-content-center align-content-between">
         {cardTable ? (
           <>
             {result.map(({ description, eMail, severity, status, _id }) => (
@@ -144,14 +231,31 @@ export default function ViewIssue() {
           </>
         ) : (
           <>
-            <table className="table">
+            <table className="table text-white  ">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Severity</th>
-                  <th scope="col">Status</th>
-                  {cat === "admin" ? <th scope="col">UserId</th> : ""}
+                  <th>
+                    <input type="checkbox" />
+                  </th>
+                  <th scope="col" className={`${idCol}`}>
+                    Id
+                  </th>
+                  <th scope="col" className={`${descCol}`}>
+                    Description
+                  </th>
+                  <th scope="col" className={`${severityCol}`}>
+                    Severity
+                  </th>
+                  <th scope="col" className={`${statusCol}`}>
+                    Status
+                  </th>
+                  {cat === "admin" ? (
+                    <th scope="col" className={`${emailCol}`}>
+                      UserId
+                    </th>
+                  ) : (
+                    ""
+                  )}
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -160,10 +264,16 @@ export default function ViewIssue() {
                   <Table
                     key={_id}
                     _id={_id}
+                    check={"checkOne"}
                     description={description}
                     severity={severity}
                     status={status}
                     eMail={eMail}
+                    idCol={idCol}
+descCol={descCol}
+severityCol={severityCol}
+statusCol={statusCol}
+emailCol={emailCol}
                   />
                 ))}
               </tbody>
@@ -179,7 +289,7 @@ export default function ViewIssue() {
           <select
             name="limit"
             id="limit"
-            class="form-select"
+            className="form-select"
             onChange={(e) => {
               handleLimitClick(e);
             }}

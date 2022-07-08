@@ -13,7 +13,6 @@ export default function Dashboard() {
   useEffect(() => {
     dispatch(getTotalIssueByUser({ eMail, cat }));
   }, []);
-  console.log(totalIssue);
   useEffect(() => {
     setTotalIssue(TotalIssue);
   }, [TotalIssue]);
@@ -21,17 +20,17 @@ export default function Dashboard() {
   const data01 = [
     {
       index: 1,
-      name: "Group A",
+      name: "Critical",
       value: totalIssue.totIssuesCri,
     },
     {
       index: 2,
-      name: "Group B",
+      name: "Minor",
       value: totalIssue.totIssuesMinor,
     },
     {
       index: 3,
-      name: "Group C",
+      name: "Major",
       value: totalIssue.totIssuesMajor,
     },
   ];
@@ -39,31 +38,22 @@ export default function Dashboard() {
   const data02 = [
     {
       index: 1,
-      name: "Group A",
+      name: "Close",
       value: totalIssue.totIssuesClose,
     },
     {
       index: 2,
-      name: "Group B",
+      name: "Open",
       value: totalIssue.totIssuesOpen,
     },
     {
       index: 3,
-      name: "Group C",
+      name: "Inprogress",
       value: totalIssue.totIssuesInp,
     },
   ];
   const color02 = ["#9933ff", "#cc6600", "#66ffcc"];
 
-  // const logout = (e) => {
-  //   console.log(
-  //     "Logout is not working for all. It will work only when you refresh ur page once or do dome activiy.",
-  //     localStorage.getItem("eMail")
-  //   );
-  //   localStorage.removeItem("eMail");
-  //   console.log(localStorage.getItem("eMail"));
-  //   navigate("/login");
-  // };
   return (
     <>
       <div className="row border border-info border-2 rounded  px-lg-5 py-auto px-md-3 px-sm-2 justify-content-center text-bg-light mt-lg-2 mx-lg-3">
@@ -75,7 +65,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="row justify-content-evenly ">
-        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2 text-bg-light">
+        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2 text-bg-light opacity-75">
           <h3 className="mx-5 text-danger border-bottom border-danger pb-md-3">
             Severity{" "}
           </h3>
@@ -136,7 +126,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2 text-bg-light">
+        <div className="col-md-5 border border-info border-3 rounded  align-self-center m-5 px-lg-4 py-lg-2 text-bg-light opacity-75">
           <h3 className="mx-5  text-danger border-bottom border-danger pb-md-3">
             Status{" "}
           </h3>

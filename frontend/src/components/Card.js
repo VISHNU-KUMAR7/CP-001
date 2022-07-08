@@ -18,21 +18,38 @@ export default function Card(props) {
     <>
       <div className="col-md-3 ">
         <div
-          className="card border border-danger border-2 rounded text-bg-primary h-100 mb-5"
+          className="card border border-danger border-2 rounded text-dark opacity-75 mb-5"
           key={_id}
         >
           <h5 className="card-title">
             <input type="checkbox" />{" "}
           </h5>
           <h6 className="card-header mb-2 text-muted">{_id}</h6>
-          <div className="card-body ">
+          <div className="card-body">
             <p className="card-text text-truncate">{description}</p>
             <div className="row">
               <div className="col-lg-4 col-md-5 ">
                 <h6 className="card-title">Severity:</h6>
               </div>
               <div className="col-lg-8 col-md-6">
-                <span className="badge text-bg-info">{severity}</span>
+                {severity === "critical" ? (
+                  <>
+                    <span className="badge text-bg-warning">{severity}</span>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    {severity === "minor" ? (
+                      <>
+                        <span className="badge text-bg-success">{severity}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="badge text-bg-dark">{severity}</span>
+                      </>
+                    )}
+                  </>
+                )}
               </div>
             </div>
             <div className="row">
@@ -40,7 +57,24 @@ export default function Card(props) {
                 <h6 className="card-title">Status:</h6>
               </div>
               <div className="col-lg-8 col-md-6">
-                <span className="badge text-bg-info">{status}</span>
+                {status === "open" ? (
+                  <>
+                    <span className="badge text-bg-danger">{status}</span>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    {status === "close" ? (
+                      <>
+                        <span className="badge text-bg-info">{status}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="badge text-bg-primary">{status}</span>
+                      </>
+                    )}
+                  </>
+                )}
               </div>
             </div>
             {cat === "admin" ? (
