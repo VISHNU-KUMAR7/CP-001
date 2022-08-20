@@ -1,2 +1,11 @@
+/.gitignore
+../.gitignore
 /backend/node_modules
 /frontend/node_modules
+/Add_issue_Form.jpg
+/Delete_issue_admin.jpg
+/delete_issue.jpg
+/edit_issue_form.jpg
+/file5.txt
+/view_issue.jpg
+/view_registration_detail.jpg
